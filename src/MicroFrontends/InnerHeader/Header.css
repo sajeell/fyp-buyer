@@ -1,0 +1,41 @@
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+}
+
+.header-logo span {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: bold;
+  font-size: 2vw;
+  text-align: left;
+  cursor: pointer;
+}
+
+.header-buttons {
+  margin-right: -30%;
+}
+
+.header-buttons span {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: bold;
+  font-size: 1.2vw;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.header-wrapper span:hover {
+  color: #555454;
+}
+
+.header-icons {
+  display: flex;
+}
+
+.header-icons img {
+  margin-right: 10px;
+  width: 40%;
+  cursor: pointer;
+}
