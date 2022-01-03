@@ -1,11 +1,10 @@
 import './App.css'
-
-import Products from './MicroFrontends/Products/Products'
+import Landing from './MicroFrontends/Landing/Landing'
 
 function App() {
   return (
     <div className='App'>
-      <Products />
+      <Landing />
     </div>
   )
 }
