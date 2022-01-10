@@ -1,16 +1,43 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import Modal from 'react-modal'
+
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
+import BiddingTab from './Tabs/BiddingTab'
+import ReviewTab from './Tabs/ReviewTab'
 
 import guitarImage from './img/itemThree.png'
 import orangeStar from './img/orangeStar.svg'
 
 import './Product.css'
-import BiddingTab from './Tabs/BiddingTab'
-import ReviewTab from './Tabs/ReviewTab'
+import BiddingDetailsModal from './Modals/BiddingDetailsModal'
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+}
+
+Modal.setAppElement(document.getElementById('root'))
 
 const ProductDetail = () => {
+  let subtitle
+
   const [tabState, setTabState] = useState(0)
+  const [modalIsOpen, setIsOpen] = React.useState(false)
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  function closeModal() {
+    setIsOpen(false)
+  }
 
   return (
     <div className='productdetail-wrapper'>
@@ -91,9 +118,18 @@ const ProductDetail = () => {
               </div>
             </div>
             <div className='productdetail-content-right'>
-              <div className='button'>
+              <div className='button' onClick={openModal}>
                 <span>Bid</span>
               </div>
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                onAfterClose={() => console.log(1)}
+                style={customStyles}
+                contentLabel='Example Modal'
+              >
+                <BiddingDetailsModal onClose={closeModal} />
+              </Modal>
             </div>
           </div>
         </div>

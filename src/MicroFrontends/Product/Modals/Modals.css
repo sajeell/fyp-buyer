@@ -1,0 +1,77 @@
+.biddingmodal-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 600px;
+}
+
+.biddingmodal-wrapper p {
+  max-width: 450px;
+  font-size: 13px;
+  color: #707070;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.modal-cross {
+  cursor: pointer;
+  left: 0;
+}
+
+.modalinput-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.modal-input {
+  padding: 10px;
+  padding-left: 15px;
+  width: 250px;
+  margin-top: 5px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.modaldisabled-input {
+  padding: 10px;
+  padding-left: 15px;
+  width: 250px;
+  margin-top: 5px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 10px;
+}
+
+.modalinput-checks-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.modalinput-check-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.modalinput-check-wrapper span {
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+.biddingmodal-content-wrapper .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 260px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #707070;
+  color: white;
+  border-radius: 10px;
+  margin-top: 20px;
+}
