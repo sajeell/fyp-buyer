@@ -1,6 +1,6 @@
 import './Landing.css'
 
-import Header from '../Header/Header'
+import InnerHeader from '../InnerHeader/InnerHeader'
 
 import itemOne from './img/itemOne.png'
 import itemTwo from './img/itemTwo.png'
@@ -11,7 +11,7 @@ const Landing = () => {
     <div className='landing-wrapper'>
       <div className='left-landing'>
         <div className='header'>
-          <Header />
+          <InnerHeader />
         </div>
         <div className='middle'>
           <div className='side-buttons'>
