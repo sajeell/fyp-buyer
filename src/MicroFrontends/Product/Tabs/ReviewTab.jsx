@@ -7,21 +7,17 @@ const ReviewTab = () => {
   return (
     <div className='reviewtab-wrapper'>
       <div className='reviewtab-review'>
-        <img
-          src={userRoundImage}
-          alt='User Review Image'
-          className='reviewtab-img'
-        />
+        <img src={userRoundImage} alt='User Avatar' className='reviewtab-img' />
         <div className='reviewtab-review-content'>
           <span className='reviewtab-name'>Joan Perkins</span>
           <div className='reviewtab-stars-wrapper'>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div className='stars' style={{ marginRight: 10 }}>
-                <img src={orangeStar} />
-                <img src={orangeStar} />
-                <img src={orangeStar} />
-                <img src={orangeStar} />
-                <img src={orangeStar} />
+                <img src={orangeStar} alt='Review Orange Star' />
+                <img src={orangeStar} alt='Review Orange Star' />
+                <img src={orangeStar} alt='Review Orange Star' />
+                <img src={orangeStar} alt='Review Orange Star' />
+                <img src={orangeStar} alt='Review Orange Star' />
               </div>
               <div className='review-text'>
                 <span>5.0</span>

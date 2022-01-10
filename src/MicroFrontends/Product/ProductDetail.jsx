@@ -26,8 +26,6 @@ const customStyles = {
 Modal.setAppElement(document.getElementById('root'))
 
 const ProductDetail = () => {
-  let subtitle
-
   const [tabState, setTabState] = useState(0)
   const [modalIsOpen, setIsOpen] = React.useState(false)
 
@@ -49,18 +47,18 @@ const ProductDetail = () => {
         </div>
         <div className='productdetail'>
           <div className='productdetail-images'>
-            <img src={guitarImage} alt='Product Image' />
+            <img src={guitarImage} alt='Product' />
           </div>
           <div className='productdetail-content'>
             <div className='productdetail-content-left'>
               <h2>Acoustic Guitar</h2>
               <div className='stars-wrapper'>
                 <div className='stars'>
-                  <img src={orangeStar} />
-                  <img src={orangeStar} />
-                  <img src={orangeStar} />
-                  <img src={orangeStar} />
-                  <img src={orangeStar} />
+                  <img src={orangeStar} alt='Review Orange Star' />
+                  <img src={orangeStar} alt='Review Orange Star' />
+                  <img src={orangeStar} alt='Review Orange Star' />
+                  <img src={orangeStar} alt='Review Orange Star' />
+                  <img src={orangeStar} alt='Review Orange Star' />
                 </div>
                 <div className='review-text'>
                   <span>5.0 - 5 Reviews</span>
@@ -110,7 +108,7 @@ const ProductDetail = () => {
               <div className='tab-content'>
                 {tabState === 0 ? (
                   <BiddingTab />
-                ) : tabState == 1 ? (
+                ) : tabState === 1 ? (
                   <ReviewTab />
                 ) : (
                   ''
