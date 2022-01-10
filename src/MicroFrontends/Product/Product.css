@@ -100,3 +100,36 @@
   padding: 40px;
   width: 100%;
 }
+
+/* Review Tab */
+
+.reviewtab-review {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 5%;
+  width: 100%;
+}
+
+.reviewtab-name {
+  font-weight: bold;
+}
+
+.review-time {
+  font-size: 14px;
+}
+
+.reviewtab-review-content {
+  margin-left: 10px;
+}
+
+.reviewtab-review-content p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.reviewtab-stars-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin-top: 7px;
+}

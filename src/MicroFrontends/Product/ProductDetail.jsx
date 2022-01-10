@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
 
@@ -5,8 +6,12 @@ import guitarImage from './img/itemThree.png'
 import orangeStar from './img/orangeStar.svg'
 
 import './Product.css'
+import BiddingTab from './Tabs/BiddingTab'
+import ReviewTab from './Tabs/ReviewTab'
 
 const ProductDetail = () => {
+  const [tabState, setTabState] = useState(0)
+
   return (
     <div className='productdetail-wrapper'>
       <div className='productdetail-top'>
@@ -53,16 +58,36 @@ const ProductDetail = () => {
                 Bid starts in <strong>2 days</strong>
               </p>
               <div className='productdetail-tabs'>
-                <div className='productdetail-tab-active'>
+                <div
+                  className={
+                    tabState === 0
+                      ? 'productdetail-tab-active'
+                      : 'productdetail-tab'
+                  }
+                  onClick={() => setTabState(0)}
+                >
                   Bidding Information
                 </div>
-                <span className='productdetail-tab'>Reviews (5)</span>
+                <span
+                  className={
+                    tabState === 1
+                      ? 'productdetail-tab-active'
+                      : 'productdetail-tab'
+                  }
+                  onClick={() => setTabState(1)}
+                >
+                  Reviews (1)
+                </span>
                 <span className='productdetail-tab'>Product Information</span>
               </div>
               <div className='tab-content'>
-                <div className='biddingtab-wrapper'>
-                  <span>Bid is not started yet</span>
-                </div>
+                {tabState === 0 ? (
+                  <BiddingTab />
+                ) : tabState == 1 ? (
+                  <ReviewTab />
+                ) : (
+                  ''
+                )}
               </div>
             </div>
             <div className='productdetail-content-right'>
