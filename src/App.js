@@ -1,12 +1,10 @@
 import './App.css'
-import Landing from './MicroFrontends/Landing/Landing'
-import Products from './MicroFrontends/Products/Products'
+import ProductDetail from './MicroFrontends/Product/ProductDetail'
 
 function App() {
   return (
     <div className='App'>
-      {/* <Landing /> */}
-      <Products />
+      <ProductDetail />
     </div>
   )
 }
