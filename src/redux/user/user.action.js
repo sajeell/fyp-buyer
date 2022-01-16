@@ -1,4 +1,5 @@
 import ActionsType from '../utils/actions.type'
+import { toast } from 'react-toastify'
 import axios from 'axios'
 
 const Url = 'http://localhost:3000/'
@@ -52,11 +53,24 @@ export const buyerLogin = (data) => {
         let response = resp.data
         dispatch(setCurrentUser(response.user))
         dispatch(setAuthToken(response.access_token))
+        toast.success('Success', {
+          theme: 'colored',
+          style: {
+            borderRadius: 5,
+          },
+          delay: 5000,
+        })
+        window.location.href = '/landing'
       })
       .catch((error) => {
         const err = error
         if (err.response) {
-          alert(err.response.data.message)
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
         }
       })
   }

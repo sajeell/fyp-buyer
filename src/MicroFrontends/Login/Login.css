@@ -14,8 +14,8 @@
 
 .login-wrapper .col:first-child {
   text-align: left;
-  width: 55%;
-  height: 100vh;
+  width: 45%;
+  height: 89.2vh;
   background-color: var(--background-color);
   color: var(--font-color);
   padding-left: 5%;
