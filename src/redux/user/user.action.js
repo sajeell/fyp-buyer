@@ -49,7 +49,7 @@ export const buyerLogin = (data) => {
     }
     axios
       .post(`${Url}auth/login`, data, { headers: headers })
-      .then((resp) => {
+      .then(async (resp) => {
         let response = resp.data
         dispatch(setCurrentUser(response.user))
         dispatch(setAuthToken(response.access_token))

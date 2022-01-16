@@ -5,8 +5,11 @@ import InnerHeader from '../InnerHeader/InnerHeader'
 import itemOne from './img/itemOne.png'
 import itemTwo from './img/itemTwo.png'
 import itemThree from './img/itemThree.png'
+import { useSelector } from 'react-redux'
 
 const Landing = () => {
+  const token = useSelector((state) => state.user.token)
+
   return (
     <div className='landing-wrapper'>
       <div className='left-landing'>
