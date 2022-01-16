@@ -1,0 +1,12 @@
+const ActionsType = {
+  // user
+  SET_CURRENT_USER: 'SET_CURRENT_USER',
+  SET_USER_DETAIL: 'SET_USER_DETAIL',
+  SET_TOKEN: 'SET_TOKEN',
+  SET_USER_TYPE: 'SET_USER_TYPE',
+
+  API_ERROR: 'API_ERROR',
+  API_SUCCESS: 'API_SUCCESS',
+}
+
+export default ActionsType

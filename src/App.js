@@ -1,8 +1,9 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import ProductDetail from './MicroFrontends/Product/ProductDetail'
-import Landing from './MicroFrontends/Landing/Landing'
+// import Landing from './MicroFrontends/Landing/Landing'
 import Products from './MicroFrontends/Products/Products'
+import Login from './MicroFrontends/Login/Login'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       </Routes>
 
       <Routes>
-        <Route exact path='/' element={<Landing />} />
+        <Route exact path='/' element={<Login />} />
       </Routes>
     </div>
   )
