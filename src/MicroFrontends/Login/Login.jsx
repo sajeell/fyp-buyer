@@ -25,8 +25,8 @@ const Login = () => {
     <div className='login-wrapper'>
       <div className='col'>
         <div className='row'>
-          <div className='title'>SchooLync</div>
-          <div className='sub-title'>The Transport Company</div>
+          <div className='title'>Barganttic</div>
+          <div className='sub-title'>The ECommerce Company</div>
         </div>
         <div className='row'>
           <img

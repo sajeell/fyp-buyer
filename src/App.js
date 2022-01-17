@@ -24,10 +24,7 @@ function App() {
   return (
     <div className='App'>
       <Routes>
-        <Route
-          path='/antiques'
-          element={authenticated === true ? <Products /> : <Navigate to='/' />}
-        />
+        <Route path='/antiques' element={<Products />} />
       </Routes>
 
       <Routes>
