@@ -6,9 +6,30 @@ import itemOne from './img/itemOne.png'
 import itemTwo from './img/itemTwo.png'
 import itemThree from './img/itemThree.png'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { getFeaturedProducts } from '../../redux/product/product.action'
 
 const Landing = () => {
+  const dispatch = useDispatch()
+  const [productOne, setProductOne] = useState({})
+  const [productTwo, setProductTwo] = useState({})
+  const [productThree, setProductThree] = useState({})
+
   const token = useSelector((state) => state.user.token)
+  const products = useSelector((state) =>
+    state.product ? state.product.featuredProducts : [],
+  )
+
+  useEffect(() => {
+    dispatch(getFeaturedProducts(token))
+  }, [token])
+
+  useEffect(() => {
+    setProductOne(products[0])
+    setProductTwo(products[1])
+    setProductThree(products[2])
+  }, [products])
 
   return (
     <div className='landing-wrapper'>
@@ -30,7 +51,9 @@ const Landing = () => {
             </div>
           </div>
           <div className='middle-right'>
-            <span id='bg-item-name'>GRAMO</span>
+            <span id='bg-item-name'>
+              {productOne ? productOne.title : 'GRAMO'}
+            </span>
             <img src={itemTwo} alt='Item Two' />
           </div>
         </div>
@@ -42,12 +65,16 @@ const Landing = () => {
       <div className='right-landing'>
         <div className='side-item'>
           <img src={itemOne} alt='Item One' />
-          <span className='side-item-name'>Acro Guitar</span>
+          <span className='side-item-name'>
+            {productTwo ? productTwo.title : 'Acoustic Guitar'}
+          </span>
           <span className='side-item-price'>Rs. 1350</span>
         </div>
         <div className='side-item'>
           <img src={itemThree} alt='Item Three' />
-          <span className='side-item-name'>Ceramic Vase</span>
+          <span className='side-item-name'>
+            {productThree ? productThree.title : 'Handmade Vase'}
+          </span>
           <span className='side-item-price'>Rs. 1350</span>
         </div>
       </div>
