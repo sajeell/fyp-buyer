@@ -23,7 +23,7 @@ const Landing = () => {
 
   useEffect(() => {
     dispatch(getFeaturedProducts(token))
-  }, [token])
+  }, [token, dispatch])
 
   useEffect(() => {
     setProductOne(products[0])

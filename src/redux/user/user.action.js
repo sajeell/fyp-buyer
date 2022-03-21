@@ -76,3 +76,9 @@ export const buyerLogin = (data) => {
       })
   }
 }
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(setAuthToken(null))
+  }
+}

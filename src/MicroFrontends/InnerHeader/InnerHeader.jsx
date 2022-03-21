@@ -1,13 +1,28 @@
-import { Navbar, Container, Nav, Dropdown, NavDropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../redux/user/user.action'
 
 import './Header.css'
 
 import searchIcon from './img/search.svg'
 import cartIcon from './img/cart.svg'
-import userIcon from './img/user.svg'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const InnerHeader = () => {
+  const token = useSelector((state) => state.user.token)
+  let navigate = useNavigate()
+  const dispatch = useDispatch()
+  const logOut = () => {
+    dispatch(logout())
+  }
+
+  useEffect(() => {
+    if (token === null) {
+      return navigate('/')
+    }
+  }, [token])
+
   return (
     <Navbar collapseOnSelect expand='lg' bg='white' variant='light'>
       <Container className='pl-0'>
@@ -30,7 +45,7 @@ const InnerHeader = () => {
             <NavDropdown title='🧕'>
               <NavDropdown.Item href=''>Profile</NavDropdown.Item>
               <NavDropdown.Item href=''>Help</NavDropdown.Item>
-              <NavDropdown.Item href=''>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={logOut}>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

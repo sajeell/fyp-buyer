@@ -1,5 +1,7 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { buyerLogin } from '../../redux/user/user.action'
 
 import './Login.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -8,18 +10,25 @@ import illustration from './img/car-illustration.png'
 import background from './img/illustration-bg.png'
 import emailIcon from './img/email.png'
 import lock from './img/lock.png'
-import { buyerLogin } from '../../redux/user/user.action'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const token = useSelector((state) => state.user.token)
 
   const onSubmitForm = async (e) => {
     e.preventDefault()
     const body = { username: email, password }
     dispatch(buyerLogin(body))
   }
+
+  useEffect(() => {
+    if (token) {
+      return navigate('/landing')
+    }
+  }, [token])
 
   return (
     <div className='login-wrapper'>
