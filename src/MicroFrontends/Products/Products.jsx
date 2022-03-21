@@ -8,6 +8,8 @@ import './Products.css'
 import {
   getAntiques,
   getFeaturedAntiques,
+  getFeaturedHandmade,
+  getHandmade,
 } from '../../redux/product/product.action'
 
 import InnerHeader from '../InnerHeader/InnerHeader'
@@ -15,20 +17,32 @@ import Footer from '../Footer/Footer'
 
 import item from './img/itemThree.png'
 
-const Products = () => {
+const Products = (props) => {
   const dispatch = useDispatch()
   let token = useSelector((state) => state.user.token)
-  const featuredAntiques = useSelector(
-    (state) => state.product.featuredAntiques,
+  const featuredAntiques = useSelector((state) =>
+    props.antiques === true
+      ? state.product.featuredAntiques
+      : state.product.featuredHandmade,
   )
-  const antiques = useSelector((state) => state.product.antiques)
+  const antiques = useSelector((state) =>
+    props.antiques === true ? state.product.antiques : state.product.handmade,
+  )
 
   useEffect(() => {
-    dispatch(getFeaturedAntiques(token))
+    if (props.antiques === true) {
+      dispatch(getFeaturedAntiques(token))
+    } else {
+      dispatch(getFeaturedHandmade(token))
+    }
   }, [token, dispatch])
 
   useEffect(() => {
-    dispatch(getAntiques(token))
+    if (props.antiques === true) {
+      dispatch(getAntiques(token))
+    } else {
+      dispatch(getHandmade(token))
+    }
   }, [token, dispatch])
 
   return (
@@ -37,8 +51,11 @@ const Products = () => {
         <InnerHeader />
         <Container>
           <div className='breadcrumbs'>
-            <span id='breadcrumbs-link'>home</span> <span>{'>'}</span>{' '}
-            <span>antiques</span>
+            <a href='/landing' className='breadcrumbs-link'>
+              home
+            </a>{' '}
+            <span>{'>'}</span>{' '}
+            <span>{props.antiques === true ? 'antiques' : 'handmade'}</span>
           </div>
           <div className='featured-list'>
             {featuredAntiques

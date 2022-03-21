@@ -11,7 +11,8 @@ function App() {
   return (
     <div className='App'>
       <Routes>
-        <Route exact path='/antiques' element={<Products />} />
+        <Route exact path='/antiques' element={<Products antiques={true} />} />
+        <Route exact path='/handmade' element={<Products handmade={true} />} />
 
         <Route exact path='/product-detail' element={<ProductDetail />} />
 

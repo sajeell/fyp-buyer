@@ -94,6 +94,7 @@ export const getFeaturedHandmade = (token) => {
     if (token == null || token.length < 1) {
       return
     }
+
     let headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

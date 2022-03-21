@@ -32,7 +32,7 @@ const InnerHeader = () => {
           <Nav>
             <Nav.Link href=''>Featured</Nav.Link>
             <Nav.Link href='/antiques'>Antiques</Nav.Link>
-            <Nav.Link href=''>Handmade</Nav.Link>
+            <Nav.Link href='/handmade'>Handmade</Nav.Link>
             <Nav.Link href=''>Bargain</Nav.Link>
             <Nav.Link className='header-icon'>
               <img src={searchIcon} alt='Search Icon In Gray Color' />

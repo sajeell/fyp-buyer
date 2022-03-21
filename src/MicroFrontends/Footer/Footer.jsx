@@ -192,22 +192,22 @@ const Footer = () => {
               <Nav className='align-items-center justify-content-md-between'>
                 <NavItem>
                   <NavLink className='footersocial ' href='#' target='_blank'>
-                    <i className='fab fa-whatsapp'></i>
+                    <i className='fa fa-whatsapp'></i>
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className='footersocial' href='#' target='_blank'>
-                    <i className='fab fa-twitter' />
+                    <i className='fa fa-twitter' />
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className='footersocial' href='#' target='_blank'>
-                    <i className='fab fa-instagram' />
+                    <i className='fa fa-instagram' />
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className='footersocial' href='#' target='_blank'>
-                    <i className='fab fa-facebook-messenger'></i>
+                    <i className='fa fa-medium'></i>
                   </NavLink>
                 </NavItem>
               </Nav>
