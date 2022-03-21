@@ -23,11 +23,11 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(getFeaturedAntiques(token))
-  }, [token])
+  }, [token, dispatch])
 
   useEffect(() => {
     dispatch(getAntiques(token))
-  }, [token])
+  }, [token, dispatch])
 
   return (
     <div className='products-wrapper'>
