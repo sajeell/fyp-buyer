@@ -1,9 +1,8 @@
 import ActionsType from '../utils/actions.type'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import URL from '../../constants/constants'
 
-const Url = URL
+const Url = 'http://localhost:3000/'
 
 export const setCurrentUser = (user) => ({
   type: ActionsType.SET_CURRENT_USER,
@@ -65,6 +64,7 @@ export const buyerLogin = (data) => {
       })
       .catch((error) => {
         const err = error
+        console.log(err)
         if (err.response) {
           toast.error(err.response.data.message, {
             theme: 'colored',
