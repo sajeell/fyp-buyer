@@ -10,14 +10,11 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const InnerHeader = () => {
-  const token = useSelector((state) => state.user.token)
   let navigate = useNavigate()
   const dispatch = useDispatch()
   const logOut = () => {
     dispatch(logout())
-    if (token === null) {
-      return navigate('/')
-    }
+    return navigate('/')
   }
 
   return (
