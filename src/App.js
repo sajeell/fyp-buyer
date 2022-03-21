@@ -6,6 +6,7 @@ import ProductDetail from './MicroFrontends/Product/ProductDetail'
 import Landing from './MicroFrontends/Landing/Landing'
 import Products from './MicroFrontends/Products/Products'
 import Login from './MicroFrontends/Login/Login'
+import Footer from './MicroFrontends/Footer/Footer'
 
 function App() {
   return (
@@ -16,7 +17,16 @@ function App() {
 
         <Route exact path='/product-detail' element={<ProductDetail />} />
 
-        <Route exact path='/landing' element={<Landing />} />
+        <Route
+          exact
+          path='/landing'
+          element={
+            <>
+              <Landing />
+              <Footer />
+            </>
+          }
+        />
 
         <Route exact path='/' element={<Login />} />
       </Routes>
