@@ -22,7 +22,13 @@ const BiddingDetailsModal = (props) => {
 
         <div className='modalinput-wrapper'>
           <span className='modalinput-label'>Minimum Price:</span>
-          <input type='number' placeholder='3200' className='modal-input' />
+          <input
+            type='number'
+            placeholder='3200'
+            className='modal-input'
+            min={0}
+            required
+          />
         </div>
 
         <div className='modalinput-checks-wrapper'>

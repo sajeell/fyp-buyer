@@ -75,3 +75,48 @@
   border-radius: 10px;
   margin-top: 20px;
 }
+
+@media screen and (max-width: 800px) {
+  .biddingmodal-wrapper {
+    width: 300px;
+  }
+
+  .biddingmodal-content-wrapper {
+    width: 300px;
+  }
+
+  .biddingmodal-content-wrapper h2 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .biddingmodal-content-wrapper p {
+    font-size: 12px;
+  }
+
+  .modalinput-label {
+    font-size: 13px;
+  }
+
+  .modaldisabled-input,
+  .modal-input {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .modalinput-checks-wrapper {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .modalinput-check-wrapper {
+    align-items: flex-start;
+  }
+  .modalinput-check-wrapper input[type='checkbox'] {
+    margin-top: 5px;
+  }
+
+  .modalinput-check-wrapper span {
+    font-size: 12px;
+  }
+}

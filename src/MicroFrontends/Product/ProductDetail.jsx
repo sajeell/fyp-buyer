@@ -11,6 +11,7 @@ import orangeStar from './img/orangeStar.svg'
 
 import './Product.css'
 import BiddingDetailsModal from './Modals/BiddingDetailsModal'
+import { Container } from 'react-bootstrap'
 
 const customStyles = {
   content: {
@@ -38,102 +39,109 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className='productdetail-wrapper'>
-      <div className='productdetail-top'>
-        <InnerHeader />
-        <div className='breadcrumbs'>
-          <span id='breadcrumbs-link'>home</span> <span>{'>'}</span>{' '}
-          <span>antiques</span> <span>{'>'}</span> <span>Acoustic Guitar</span>
-        </div>
-        <div className='productdetail'>
-          <div className='productdetail-images'>
-            <img src={guitarImage} alt='Product' />
-          </div>
-          <div className='productdetail-content'>
-            <div className='productdetail-content-left'>
-              <h2>Acoustic Guitar</h2>
-              <div className='stars-wrapper'>
-                <div className='stars'>
-                  <img src={orangeStar} alt='Review Orange Star' />
-                  <img src={orangeStar} alt='Review Orange Star' />
-                  <img src={orangeStar} alt='Review Orange Star' />
-                  <img src={orangeStar} alt='Review Orange Star' />
-                  <img src={orangeStar} alt='Review Orange Star' />
-                </div>
-                <div className='review-text'>
-                  <span>5.0 - 5 Reviews</span>
-                </div>
+    <>
+      <Container>
+        <div className='productdetail-wrapper'>
+          <InnerHeader />
+          <div className='productdetail-top'>
+            <div className='breadcrumbs'>
+              <span className='breadcrumbs-link'>home</span> <span>{'>'}</span>{' '}
+              <span className='breadcrumbs-link'>antiques</span>{' '}
+              <span>{'>'}</span> <span>Acoustic Guitar</span>
+            </div>
+            <div className='productdetail'>
+              <div className='productdetail-images'>
+                <img src={guitarImage} alt='Product' />
               </div>
-              <span>
-                Starts from <strong>25000/-</strong>
-              </span>
-              <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et.
-              </p>
-              <div style={{ marginTop: '3%' }}></div>
-              <span id='warranty-text'>6 months seller warranty</span>
-              <div style={{ marginTop: '3%' }}></div>
-              <p>
-                Bid starts in <strong>2 days</strong>
-              </p>
-              <div className='productdetail-tabs'>
-                <div
-                  className={
-                    tabState === 0
-                      ? 'productdetail-tab-active'
-                      : 'productdetail-tab'
-                  }
-                  onClick={() => setTabState(0)}
-                >
-                  Bidding Information
+              <div className='productdetail-content'>
+                <div className='productdetail-content-left'>
+                  <h2>Acoustic Guitar</h2>
+                  <div className='stars-wrapper'>
+                    <div className='stars'>
+                      <img src={orangeStar} alt='Review Orange Star' />
+                      <img src={orangeStar} alt='Review Orange Star' />
+                      <img src={orangeStar} alt='Review Orange Star' />
+                      <img src={orangeStar} alt='Review Orange Star' />
+                      <img src={orangeStar} alt='Review Orange Star' />
+                    </div>
+                    <div className='review-text'>
+                      <span>5.0 - 5 Reviews</span>
+                    </div>
+                  </div>
+                  <span>
+                    Starts from <strong>25000/-</strong>
+                  </span>
+                  <p className='productdetail-description'>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                    nonumy eirmod tempor invidunt ut labore et.
+                  </p>
+                  <div style={{ marginTop: '3%' }}></div>
+                  <span id='warranty-text'>6 months seller warranty</span>
+                  <div style={{ marginTop: '3%' }}></div>
+                  <p>
+                    Bid starts in <strong>2 days</strong>
+                  </p>
+                  <div className='productdetail-tabs'>
+                    <div
+                      className={
+                        tabState === 0
+                          ? 'productdetail-tab-active'
+                          : 'productdetail-tab'
+                      }
+                      onClick={() => setTabState(0)}
+                    >
+                      Bidding Information
+                    </div>
+                    <span
+                      className={
+                        tabState === 1
+                          ? 'productdetail-tab-active'
+                          : 'productdetail-tab'
+                      }
+                      onClick={() => setTabState(1)}
+                    >
+                      Reviews (1)
+                    </span>
+                    <span className='productdetail-tab'>
+                      Product Information
+                    </span>
+                  </div>
+                  <div className='tab-content'>
+                    {tabState === 0 ? (
+                      <BiddingTab />
+                    ) : tabState === 1 ? (
+                      <ReviewTab />
+                    ) : (
+                      ''
+                    )}
+                  </div>
                 </div>
-                <span
-                  className={
-                    tabState === 1
-                      ? 'productdetail-tab-active'
-                      : 'productdetail-tab'
-                  }
-                  onClick={() => setTabState(1)}
-                >
-                  Reviews (1)
-                </span>
-                <span className='productdetail-tab'>Product Information</span>
-              </div>
-              <div className='tab-content'>
-                {tabState === 0 ? (
-                  <BiddingTab />
-                ) : tabState === 1 ? (
-                  <ReviewTab />
-                ) : (
-                  ''
-                )}
+                <div className='productdetail-content-right'>
+                  <div className='button' onClick={openModal}>
+                    <span>Bid</span>
+                  </div>
+                  <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                    onAfterClose={() => console.log(1)}
+                    style={customStyles}
+                    contentLabel='Example Modal'
+                  >
+                    <BiddingDetailsModal onClose={closeModal} />
+                  </Modal>
+                </div>
               </div>
             </div>
-            <div className='productdetail-content-right'>
-              <div className='button' onClick={openModal}>
-                <span>Bid</span>
-              </div>
-              <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                onAfterClose={() => console.log(1)}
-                style={customStyles}
-                contentLabel='Example Modal'
-              >
-                <BiddingDetailsModal onClose={closeModal} />
-              </Modal>
-            </div>
           </div>
         </div>
-      </div>
+      </Container>
       <Footer />
-    </div>
+    </>
   )
 }
 
