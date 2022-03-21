@@ -15,7 +15,9 @@
 .login-wrapper .col:first-child {
   text-align: left;
   width: 45%;
-  height: 89.2vh;
+  height: 100vh;
+  border: none;
+  overflow: hidden;
   background-color: var(--background-color);
   color: var(--font-color);
   padding-left: 5%;
@@ -74,9 +76,9 @@
   padding: 18px;
   border: none;
   border-radius: 10px;
-  /* text-align: center; */
   color: var(--font-color);
-  padding-left: 50px;
+  padding-left: 20px;
+  font-size: 14px;
 }
 
 #password {
@@ -97,16 +99,6 @@
   margin-top: 10px;
 }
 
-.login-wrapper .col:last-child .row:nth-child(3) {
-  text-align: right;
-  font-size: 12px;
-  margin-top: 10px;
-  color: var(--font-color);
-  font-weight: bold;
-  cursor: pointer;
-  max-width: 350px;
-}
-
 .login-wrapper .signin-button {
   background-color: #00978e !important;
   color: white;
@@ -118,7 +110,7 @@
   font-size: 18px;
   margin-top: 35px;
   cursor: pointer;
-  max-width: 350px;
+  max-width: 352px;
 }
 
 .login-wrapper .col:last-child .signin-button:hover {
@@ -128,4 +120,83 @@
 .login-wrapper .col:last-child .signin-button:active {
   background-color: var(--button-hover-color);
   transform: translateY(2px);
+}
+
+.forgot-password {
+  text-align: right;
+  font-size: 12px;
+  margin-top: 10px;
+  color: var(--font-color);
+  font-weight: bold;
+  cursor: pointer;
+  max-width: 350px;
+}
+
+.login-form {
+  margin-top: 10%;
+  margin-left: 0 !important;
+}
+
+.login-wrapper .container {
+  margin-left: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .login-wrapper .col:first-child {
+    display: none;
+  }
+
+  .login-wrapper {
+    overflow: hidden;
+  }
+
+  .login-wrapper .col:last-child {
+    display: block;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center !important;
+    padding-left: 0 !important;
+    margin-top: 25%;
+    background-color: #f4f5f7;
+    padding-top: 50px;
+    padding-bottom: 60px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .login-wrapper .col:last-child .input-row {
+    margin: 0;
+    padding: 0;
+  }
+
+  .login-wrapper .signin-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* margin-left: -10px; */
+  }
+
+  .login-wrapper .login-form .container {
+    margin-top: 0;
+    margin-right: 0px !important;
+    padding-right: 0px;
+  }
+
+  .login-form {
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 25%;
+    margin-bottom: 5%;
+  }
+
+  #email,
+  #password {
+    height: 50px;
+    width: 95%;
+  }
 }

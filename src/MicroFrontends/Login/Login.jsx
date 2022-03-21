@@ -10,6 +10,7 @@ import illustration from './img/car-illustration.png'
 import background from './img/illustration-bg.png'
 import emailIcon from './img/email.png'
 import lock from './img/lock.png'
+import { Container } from 'react-bootstrap'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -54,44 +55,44 @@ const Login = () => {
         <div className='row'>
           <span className='headline'>Sign In</span>
         </div>
-        <div className='row'>
-          <div className='input-row'>
-            <img src={emailIcon} alt='Mail envelope' />
-            <input
-              type='email'
-              name='email'
-              id='email'
-              placeholder='Username'
-              required
-              value={email}
-              onChange={(e) => {
-                e.preventDefault()
-                setEmail(e.target.value)
-              }}
-            />
+        <Container className='login-form'>
+          <div className='row'>
+            <div className='input-row'>
+              <input
+                type='email'
+                name='email'
+                id='email'
+                placeholder='Username'
+                required
+                value={email}
+                onChange={(e) => {
+                  e.preventDefault()
+                  setEmail(e.target.value)
+                }}
+              />
+            </div>
+            <div className='input-row'>
+              <input
+                type='password'
+                name='password'
+                id='password'
+                placeholder='Password'
+                required
+                value={password}
+                onChange={(e) => {
+                  e.preventDefault()
+                  setPassword(e.target.value)
+                }}
+              />
+            </div>
           </div>
-          <div className='input-row'>
-            <img src={lock} alt='Lock' id='lock' />
-            <input
-              type='password'
-              name='password'
-              id='password'
-              placeholder='Password'
-              required
-              value={password}
-              onChange={(e) => {
-                e.preventDefault()
-                setPassword(e.target.value)
-              }}
-            />
+          <div className='forgot-password'>
+            <span>Forgot Password?</span>
           </div>
-        </div>
-        <div className='row'>
-          <span>Forgot Password?</span>
-        </div>
-        <div className='signin-button' onClick={onSubmitForm}>
-          Sign In
-        </div>
+          <div className='signin-button' onClick={onSubmitForm}>
+            Sign In
+          </div>
+        </Container>
       </div>
     </div>
   )
