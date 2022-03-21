@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getFeaturedProducts } from '../../redux/product/product.action'
+import { useNavigate } from 'react-router-dom'
 
 const Landing = () => {
   const dispatch = useDispatch()
@@ -20,6 +21,17 @@ const Landing = () => {
   const products = useSelector((state) =>
     state.product ? state.product.featuredProducts : [],
   )
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (
+      typeof token === null ||
+      typeof token === 'undefined' ||
+      token === null
+    ) {
+      return navigate('/')
+    }
+  }, [token])
 
   useEffect(() => {
     dispatch(getFeaturedProducts(token))

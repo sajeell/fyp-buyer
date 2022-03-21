@@ -15,13 +15,10 @@ const InnerHeader = () => {
   const dispatch = useDispatch()
   const logOut = () => {
     dispatch(logout())
-  }
-
-  useEffect(() => {
     if (token === null) {
       return navigate('/')
     }
-  }, [token])
+  }
 
   return (
     <Navbar collapseOnSelect expand='lg' bg='white' variant='light'>
@@ -34,7 +31,8 @@ const InnerHeader = () => {
         >
           <Nav>
             <Nav.Link href=''>Featured</Nav.Link>
-            <Nav.Link href=''>Shop</Nav.Link>
+            <Nav.Link href='/antiques'>Antiques</Nav.Link>
+            <Nav.Link href=''>Handmade</Nav.Link>
             <Nav.Link href=''>Bargain</Nav.Link>
             <Nav.Link className='header-icon'>
               <img src={searchIcon} alt='Search Icon In Gray Color' />
