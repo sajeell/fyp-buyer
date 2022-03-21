@@ -183,8 +183,8 @@
   .login-wrapper .signin-button {
     display: flex;
     justify-content: center;
-    width: 100%;
-    /* margin-left: -10px; */
+    width: 102%;
+    margin-left: -2.5px;
   }
 
   .login-wrapper .login-form .container {
