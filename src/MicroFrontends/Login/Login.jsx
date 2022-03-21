@@ -89,7 +89,7 @@ const Login = () => {
         <div className='row'>
           <span>Forgot Password?</span>
         </div>
-        <div className='button' onClick={onSubmitForm}>
+        <div className='signin-button' onClick={onSubmitForm}>
           Sign In
         </div>
       </div>
