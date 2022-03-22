@@ -15,7 +15,7 @@ function App() {
         <Route exact path='/antiques' element={<Products antiques={true} />} />
         <Route exact path='/handmade' element={<Products handmade={true} />} />
 
-        <Route exact path='/product-detail' element={<ProductDetail />} />
+        <Route exact path='/product/detail/:id' element={<ProductDetail />} />
 
         <Route
           exact

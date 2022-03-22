@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
 import BiddingTab from './Tabs/BiddingTab'
 import ReviewTab from './Tabs/ReviewTab'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import guitarImage from './img/itemThree.png'
 import orangeStar from './img/orangeStar.svg'
+import { getProduct } from '../../redux/product/product.action'
 
 import './Product.css'
 import BiddingDetailsModal from './Modals/BiddingDetailsModal'
 import { Container } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 
 const customStyles = {
   content: {
@@ -27,8 +31,14 @@ const customStyles = {
 Modal.setAppElement(document.getElementById('root'))
 
 const ProductDetail = () => {
+  const dispatch = useDispatch()
   const [tabState, setTabState] = useState(0)
   const [modalIsOpen, setIsOpen] = React.useState(false)
+  const [productID, setProductID] = useState('')
+  const productDetail = useSelector((state) => state.product.productDetail)
+  const token = useSelector((state) => state.user.token)
+
+  const { id } = useParams()
 
   function openModal() {
     setIsOpen(true)
@@ -37,6 +47,15 @@ const ProductDetail = () => {
   function closeModal() {
     setIsOpen(false)
   }
+
+  const getProductDetail = async () => {
+    setProductID(id)
+    dispatch(getProduct(token, id))
+  }
+
+  useEffect(() => {
+    getProductDetail()
+  }, [id])
 
   return (
     <>
@@ -47,7 +66,14 @@ const ProductDetail = () => {
             <div className='breadcrumbs'>
               <span className='breadcrumbs-link'>home</span> <span>{'>'}</span>{' '}
               <span className='breadcrumbs-link'>antiques</span>{' '}
-              <span>{'>'}</span> <span>Acoustic Guitar</span>
+              <span>{'>'}</span>{' '}
+              <span>
+                {productDetail
+                  ? productDetail.title
+                    ? productDetail.title
+                    : ''
+                  : ''}
+              </span>
             </div>
             <div className='productdetail'>
               <div className='productdetail-images'>
@@ -55,7 +81,14 @@ const ProductDetail = () => {
               </div>
               <div className='productdetail-content'>
                 <div className='productdetail-content-left'>
-                  <h2>Acoustic Guitar</h2>
+                  <h2>
+                    {' '}
+                    {productDetail
+                      ? productDetail.title
+                        ? productDetail.title
+                        : ''
+                      : ''}
+                  </h2>
                   <div className='stars-wrapper'>
                     <div className='stars'>
                       <img src={orangeStar} alt='Review Orange Star' />
@@ -72,13 +105,11 @@ const ProductDetail = () => {
                     Starts from <strong>25000/-</strong>
                   </span>
                   <p className='productdetail-description'>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                    ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et.
+                    {productDetail
+                      ? productDetail.description
+                        ? productDetail.description
+                        : ''
+                      : ''}
                   </p>
                   <div style={{ marginTop: '3%' }}></div>
                   <span id='warranty-text'>6 months seller warranty</span>

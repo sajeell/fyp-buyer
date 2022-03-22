@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   featuredProducts: [],
   featuredAntiques: [],
   featuredHandmade: [],
+  productDetail: {},
   antiques: [],
   handmade: [],
   error: {},
@@ -36,6 +37,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         handmade: action.payload,
+      }
+    case ActionsType.PRODUCT_DETAIL:
+      return {
+        ...state,
+        productDetail: action.payload,
       }
     default:
       return state

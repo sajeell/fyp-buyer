@@ -61,8 +61,13 @@
 .stars-wrapper {
   display: flex;
   align-items: center;
-  margin-right: 1%;
-  margin-bottom: 5%;
+  margin-left: 5%;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
 
 .review-text {
@@ -89,6 +94,8 @@
 .productdetail-tab {
   font-size: 14px;
   cursor: pointer;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .productdetail-tab-active {
@@ -150,8 +157,28 @@
 .reviewtab-stars-wrapper {
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 450px;
   margin-top: 7px;
+}
+
+.reviewtab-review {
+  flex-direction: column;
+}
+
+.reviewtab-img {
+  margin-right: 20px;
+  width: 40px;
+}
+
+.reviewtab-review-content p {
+  font-size: 12px;
+  margin-left: -5px;
+}
+
+.reviewtab-row-1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 @media screen and (max-width: 600px) {

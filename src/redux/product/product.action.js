@@ -30,6 +30,11 @@ export const setHandmade = (product) => ({
   payload: product,
 })
 
+export const setProductDetail = (product) => ({
+  type: ActionsType.PRODUCT_DETAIL,
+  payload: product,
+})
+
 export const getFeaturedProducts = (token) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
@@ -166,6 +171,36 @@ export const getHandmade = (token) => {
       .then((resp) => {
         let response = resp.data
         dispatch(setHandmade(response))
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const getProduct = (token, id) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+
+    axios
+      .get(`${Url}product/by/${id}`, { headers: headers })
+      .then((resp) => {
+        let response = resp.data
+        dispatch(setProductDetail(response))
       })
       .catch((error) => {
         const err = error

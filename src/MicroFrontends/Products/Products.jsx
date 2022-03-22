@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Card, Container } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 import './Products.css'
 
@@ -20,6 +21,7 @@ import item from './img/itemThree.png'
 const Products = (props) => {
   const dispatch = useDispatch()
   let token = useSelector((state) => state.user.token)
+  const navigate = useNavigate()
   const featuredAntiques = useSelector((state) =>
     props.antiques === true
       ? state.product.featuredAntiques
@@ -60,7 +62,13 @@ const Products = (props) => {
           <div className='featured-list'>
             {featuredAntiques
               ? featuredAntiques.map((product) => (
-                  <Card key={product._id} className='featured-box'>
+                  <Card
+                    key={product._id}
+                    className='featured-box'
+                    onClick={() => {
+                      navigate(`/product/detail/${product._id}`)
+                    }}
+                  >
                     <div className='featured-box-left'>
                       <span id='featured-name'>{product.title}</span>
                       <span id='featured-time'>bidding in 4 days</span>
@@ -76,7 +84,11 @@ const Products = (props) => {
           <div className='items-list'>
             {antiques
               ? antiques.map((antique) => (
-                  <Card className='item-box' key={antique._id}>
+                  <Card
+                    className='item-box'
+                    key={antique._id}
+                    onClick={() => console.log(antique._id)}
+                  >
                     <div className='item-box-top'>
                       <span id='featured-name'>{antique.title}</span>
                       <span id='featured-time'>25000 +</span>
