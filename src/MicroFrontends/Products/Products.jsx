@@ -87,7 +87,9 @@ const Products = (props) => {
                   <Card
                     className='item-box'
                     key={antique._id}
-                    onClick={() => console.log(antique._id)}
+                    onClick={() => {
+                      navigate(`/product/detail/${antique._id}`)
+                    }}
                   >
                     <div className='item-box-top'>
                       <span id='featured-name'>{antique.title}</span>
