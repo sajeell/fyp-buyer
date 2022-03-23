@@ -15,12 +15,25 @@ import { Container } from 'react-bootstrap'
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const token = useSelector((state) => state.user.token)
 
   const onSubmitForm = async (e) => {
     e.preventDefault()
+
+    if (email.length < 1) {
+      setEmailError('Email field is required')
+    }
+
+    if (password.length < 1) {
+      setPasswordError('Password field is required')
+      return
+    }
+
     const body = { username: email, password }
     dispatch(buyerLogin(body))
   }
@@ -57,6 +70,13 @@ const Login = () => {
         </div>
         <Container className='login-form'>
           <div className='row'>
+            {emailError && emailError.length > 0 ? (
+              <small style={{ color: '#dc3545', marginBottom: 5 }}>
+                {emailError}
+              </small>
+            ) : (
+              ''
+            )}
             <div className='input-row'>
               <input
                 type='email'
@@ -64,13 +84,28 @@ const Login = () => {
                 id='email'
                 placeholder='Username'
                 required
+                className={`form-control ${
+                  emailError && emailError.length > 0
+                    ? 'is-invalid'
+                    : 'is-valid'
+                }`}
                 value={email}
                 onChange={(e) => {
                   e.preventDefault()
+                  setEmailError('')
                   setEmail(e.target.value)
                 }}
               />
             </div>
+            {passwordError && passwordError.length > 0 ? (
+              <small
+                style={{ color: '#dc3545', marginTop: 10, marginBottom: -12 }}
+              >
+                {passwordError}
+              </small>
+            ) : (
+              ''
+            )}
             <div className='input-row'>
               <input
                 type='password'
@@ -78,9 +113,15 @@ const Login = () => {
                 id='password'
                 placeholder='Password'
                 required
+                className={`form-control ${
+                  passwordError && passwordError.length > 0
+                    ? 'is-invalid'
+                    : 'is-valid'
+                }`}
                 value={password}
                 onChange={(e) => {
                   e.preventDefault()
+                  setPasswordError()
                   setPassword(e.target.value)
                 }}
               />

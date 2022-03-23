@@ -65,15 +65,12 @@ export const buyerLogin = (data) => {
       })
       .catch((error) => {
         const err = error
-        console.log(err)
-        if (err.response) {
-          toast.error(err.response.data.message, {
-            theme: 'colored',
-            style: {
-              borderRadius: 5,
-            },
-          })
-        }
+        toast.error(err.message, {
+          theme: 'colored',
+          style: {
+            borderRadius: 5,
+          },
+        })
       })
   }
 }
