@@ -1,16 +1,23 @@
-import './ProfileSidebar.css'
-
+import { useNavigate } from 'react-router-dom'
 import { Navigation } from 'react-minimal-side-navigation'
+import { useDispatch, useSelector } from 'react-redux'
+
+import './ProfileSidebar.css'
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
+import { drawerPage, setDrawerPage } from '../../../redux/loader/loader.action'
 
 const ProfileSidebar = () => {
+  const dispatch = useDispatch()
+  const activeItemId = useSelector((state) => state.loader.activeItemId)
+  const navigate = useNavigate()
+
   return (
     <div className='profilesidebar-wrapper'>
       <Navigation
-        // you can use your own router's api to get pathname
-        activeItemId='/history'
+        activeItemId={activeItemId}
         onSelect={({ itemId }) => {
-          // maybe push to the route
+          dispatch(drawerPage(itemId))
+          return navigate(itemId)
         }}
         items={[
           {

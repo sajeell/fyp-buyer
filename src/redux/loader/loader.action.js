@@ -1,12 +1,20 @@
 import ActionsType from '../utils/actions.type'
-import URL from '../../constants/constants'
-
-const Url = URL
 
 export const setLoading = (loading) => ({
   type: ActionsType.LOADING,
   payload: loading,
 })
+
+export const setDrawerPage = (drawerPage) => ({
+  type: ActionsType.ACTIVE_PAGE,
+  payload: drawerPage,
+})
+
+export const drawerPage = (page) => {
+  return (dispatch) => {
+    dispatch(setDrawerPage(page))
+  }
+}
 
 export const loading = (loading) => {
   return (dispatch) => {

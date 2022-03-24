@@ -2,6 +2,7 @@ import ActionsType from './../utils/actions.type'
 
 const INITIAL_STATE = {
   loading: false,
+  activeItemId: '/history',
   error: {},
   response: {},
 }
@@ -12,6 +13,11 @@ const loaderReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: action.payload,
+      }
+    case ActionsType.ACTIVE_PAGE:
+      return {
+        ...state,
+        activeItemId: action.payload,
       }
     case ActionsType.API_ERROR:
       return {
