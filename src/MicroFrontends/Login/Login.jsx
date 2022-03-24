@@ -11,6 +11,7 @@ import background from './img/illustration-bg.png'
 import emailIcon from './img/email.png'
 import lock from './img/lock.png'
 import { Container } from 'react-bootstrap'
+import { loading } from '../../redux/loader/loader.action'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -35,7 +36,9 @@ const Login = () => {
     }
 
     const body = { username: email, password }
+    dispatch(loading(true))
     dispatch(buyerLogin(body))
+    dispatch(loading(false))
   }
 
   useEffect(() => {

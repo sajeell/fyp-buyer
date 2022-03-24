@@ -1,4 +1,12 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
+import {
+  Navbar,
+  Container,
+  Nav,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button,
+} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../redux/user/user.action'
 
@@ -26,15 +34,23 @@ const InnerHeader = () => {
           id='responsive-navbar-nav'
           className='justify-content-end'
         >
-          <Nav>
+          <Nav style={{ alignItems: 'center' }}>
             <Nav.Link href=''>Featured</Nav.Link>
             <Nav.Link href='/antiques'>Antiques</Nav.Link>
             <Nav.Link href='/handmade'>Handmade</Nav.Link>
             <Nav.Link href=''>Bargain</Nav.Link>
             <Nav.Link className='header-icon'>
-              <img src={searchIcon} alt='Search Icon In Gray Color' />
+              <Form className='d-flex'>
+                <FormControl
+                  type='search'
+                  placeholder='Search'
+                  className='me-2'
+                  aria-label='Search'
+                />
+                <Button variant='outline-success'>Search</Button>
+              </Form>
             </Nav.Link>
-            <Nav.Link className='heade-cart-icon'>
+            <Nav.Link className='heade-cart-icon' href='/cart'>
               <img src={cartIcon} alt='Cart Icon In Gray Color' />
             </Nav.Link>
             <NavDropdown title='🧕'>

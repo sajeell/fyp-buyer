@@ -17,6 +17,7 @@ import InnerHeader from '../InnerHeader/InnerHeader'
 import Footer from '../Footer/Footer'
 
 import item from './img/itemThree.png'
+import { loading } from '../../redux/loader/loader.action'
 
 const Products = (props) => {
   const dispatch = useDispatch()
@@ -32,19 +33,27 @@ const Products = (props) => {
   )
 
   useEffect(() => {
+    dispatch(loading(true))
+
     if (props.antiques === true) {
       dispatch(getFeaturedAntiques(token))
     } else {
       dispatch(getFeaturedHandmade(token))
     }
+
+    dispatch(loading(false))
   }, [token, dispatch])
 
   useEffect(() => {
+    dispatch(loading(true))
+
     if (props.antiques === true) {
       dispatch(getAntiques(token))
     } else {
       dispatch(getHandmade(token))
     }
+
+    dispatch(loading(false))
   }, [token, dispatch])
 
   return (

@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import { getFeaturedProducts } from '../../redux/product/product.action'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../Footer/Footer'
+import { loading } from '../../redux/loader/loader.action'
 
 const Landing = () => {
   const dispatch = useDispatch()
@@ -35,7 +36,9 @@ const Landing = () => {
   }, [token])
 
   useEffect(() => {
+    dispatch(loading(true))
     dispatch(getFeaturedProducts(token))
+    dispatch(loading(false))
   }, [token, dispatch])
 
   useEffect(() => {

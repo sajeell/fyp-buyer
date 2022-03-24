@@ -2,6 +2,7 @@ import ActionsType from '../utils/actions.type'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import URL from '../../constants/constants'
+import { loading } from '../loader/loader.action'
 
 const Url = URL
 
@@ -45,6 +46,7 @@ export const createAccount = (data) => {
 
 export const buyerLogin = (data) => {
   return (dispatch) => {
+    dispatch(loading(true))
     let headers = {
       'Content-Type': 'application/json',
     }
@@ -61,6 +63,8 @@ export const buyerLogin = (data) => {
           },
           delay: 5000,
         })
+        dispatch(loading(false))
+
         window.location.href = '/landing'
       })
       .catch((error) => {
