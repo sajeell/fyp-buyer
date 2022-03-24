@@ -1,0 +1,52 @@
+.profilesidebar-wrapper {
+  border-right: 1px solid black;
+}
+
+hr {
+  margin: 0px !important;
+}
+
+.profilesidebar-wrapper
+  .side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option-selected {
+  border-left: none;
+  font-weight: bold !important;
+  background-color: white !important;
+}
+
+.profilesidebar-wrapper
+  .side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option-selected
+  .side-navigation-panel-select-option-wrap
+  .side-navigation-panel-select-option-text {
+  font-weight: bold !important;
+}
+
+.profilesidebar-wrapper
+  .side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option:hover {
+  border-left: none;
+}
+
+.profilesidebar-wrapper
+  .side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap
+  .side-navigation-panel-select-option {
+  border-left: none;
+  width: 160px;
+}
+
+.profilesidebar-wrapper
+  .side-navigation-panel
+  .side-navigation-panel-select
+  .side-navigation-panel-select-wrap {
+  border-bottom: 1px solid gray;
+  border-left: none;
+}

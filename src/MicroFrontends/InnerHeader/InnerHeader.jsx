@@ -55,6 +55,7 @@ const InnerHeader = () => {
             </Nav.Link>
             <NavDropdown title='🧕'>
               <NavDropdown.Item href=''>Profile</NavDropdown.Item>
+              <NavDropdown.Item href='/history'>History</NavDropdown.Item>
               <NavDropdown.Item href=''>Help</NavDropdown.Item>
               <NavDropdown.Item onClick={logOut}>Logout</NavDropdown.Item>
             </NavDropdown>

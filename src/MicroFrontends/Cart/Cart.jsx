@@ -12,8 +12,10 @@ const Cart = () => {
         <InnerHeader />
         <div className='page-top'>
           <div className='breadcrumbs'>
-            <span className='breadcrumbs-link'>home</span> <span>{'>'}</span>{' '}
-            <span className='breadcrumbs-link'>cart</span>{' '}
+            <a href='/landing' className='breadcrumbs-link'>
+              home
+            </a>{' '}
+            <span>{'>'}</span> <span className='breadcrumbs-link'>cart</span>{' '}
           </div>
           <p className='page-subtitle'>CART</p>
         </div>

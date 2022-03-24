@@ -11,6 +11,7 @@ import Login from './MicroFrontends/Login/Login'
 import Footer from './MicroFrontends/Footer/Footer'
 import Cart from './MicroFrontends/Cart/Cart'
 import { useSelector } from 'react-redux'
+import History from './MicroFrontends/Profile/History/History'
 
 const override = `
   display: block;
@@ -49,6 +50,7 @@ function App() {
         <Route exact path='/product/detail/:id' element={<ProductDetail />} />
 
         <Route exact path='/cart' element={<Cart />} />
+        <Route exact path='/history' element={<History />} />
 
         <Route
           exact

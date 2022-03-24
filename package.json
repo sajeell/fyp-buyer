@@ -19,6 +19,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.1",
     "react-dom": "^17.0.2",
+    "react-minimal-side-navigation": "^1.9.2",
     "react-modal": "^3.14.4",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
@@ -37,7 +38,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format:components": "prettier --write --single-quote --semi false --list-different --print-width 80 src/**/*.jsx",
-    "format": "prettier --write --single-quote --semi false --list-different --print-width 80 ./App.js"
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [

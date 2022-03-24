@@ -64,7 +64,10 @@ const ProductDetail = () => {
           <InnerHeader />
           <div className='productdetail-top'>
             <div className='breadcrumbs'>
-              <span className='breadcrumbs-link'>home</span> <span>{'>'}</span>{' '}
+              <a href='/landing' className='breadcrumbs-link'>
+                home
+              </a>{' '}
+              <span>{'>'}</span>{' '}
               <span className='breadcrumbs-link'>antiques</span>{' '}
               <span>{'>'}</span>{' '}
               <span>
