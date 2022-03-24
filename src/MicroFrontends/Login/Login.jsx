@@ -8,8 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import illustration from './img/car-illustration.png'
 import background from './img/illustration-bg.png'
-import emailIcon from './img/email.png'
-import lock from './img/lock.png'
+
 import { Container } from 'react-bootstrap'
 import { loading } from '../../redux/loader/loader.action'
 
