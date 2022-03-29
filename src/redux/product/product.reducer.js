@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   productDetail: {},
   antiques: [],
   handmade: [],
+  page: 0,
   error: {},
   response: {},
 }
@@ -42,6 +43,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         productDetail: action.payload,
+      }
+    case ActionsType.SET_PAGE_NUMBER:
+      return {
+        ...state,
+        page: action.payload,
       }
     default:
       return state

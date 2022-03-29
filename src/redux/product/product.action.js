@@ -35,6 +35,11 @@ export const setProductDetail = (product) => ({
   payload: product,
 })
 
+export const setPageNumber = (page) => ({
+  type: ActionsType.SET_PAGE_NUMBER,
+  payload: page < 0 ? 0 : page,
+})
+
 export const getFeaturedProducts = (token) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
@@ -126,7 +131,7 @@ export const getFeaturedHandmade = (token) => {
   }
 }
 
-export const getAntiques = (token) => {
+export const getAntiques = (token, page = 0) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
       return
@@ -137,10 +142,20 @@ export const getAntiques = (token) => {
     }
 
     axios
-      .get(`${Url}product/antiques`, { headers: headers })
+      .get(
+        `${Url}product/category/antique/?filter={"category":{"$eq":"Antique"}}&limit=10&page=${page}`,
+        { headers: headers },
+      )
       .then((resp) => {
+        if (page < 0) {
+          return
+        }
+
         let response = resp.data
-        dispatch(setAntiques(response))
+
+        dispatch(setAntiques(response.data))
+
+        dispatch(setPageNumber(response.data.pagination.page))
       })
       .catch((error) => {
         const err = error
@@ -156,7 +171,7 @@ export const getAntiques = (token) => {
   }
 }
 
-export const getHandmade = (token) => {
+export const getHandmade = (token, page = 0) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
       return
@@ -167,10 +182,18 @@ export const getHandmade = (token) => {
     }
 
     axios
-      .get(`${Url}product/handmade`, { headers: headers })
+      .get(
+        `${Url}product/category/handmade/?filter={"category":{"$eq":"Antique"}}&limit=10&page=${page}`,
+        { headers: headers },
+      )
       .then((resp) => {
+        if (page < 0) {
+          return
+        }
+
         let response = resp.data
-        dispatch(setHandmade(response))
+        dispatch(setHandmade(response.data))
+        dispatch(setPageNumber(response.data.pagination.page))
       })
       .catch((error) => {
         const err = error

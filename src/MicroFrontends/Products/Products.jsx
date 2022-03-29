@@ -11,6 +11,7 @@ import {
   getFeaturedAntiques,
   getFeaturedHandmade,
   getHandmade,
+  setPageNumber,
 } from '../../redux/product/product.action'
 
 import InnerHeader from '../InnerHeader/InnerHeader'
@@ -22,6 +23,8 @@ import { loading } from '../../redux/loader/loader.action'
 const Products = (props) => {
   const dispatch = useDispatch()
   let token = useSelector((state) => state.user.token)
+  const pageNumber = useSelector((state) => state.product.page)
+
   const navigate = useNavigate()
   const featuredAntiques = useSelector((state) =>
     props.antiques === true
@@ -48,9 +51,9 @@ const Products = (props) => {
     dispatch(loading(true))
 
     if (props.antiques === true) {
-      dispatch(getAntiques(token))
+      dispatch(getAntiques(token, pageNumber))
     } else {
-      dispatch(getHandmade(token))
+      dispatch(getHandmade(token, pageNumber))
     }
 
     dispatch(loading(false))
@@ -113,6 +116,51 @@ const Products = (props) => {
                   </Card>
                 ))
               : ''}
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <div className='pagination-wrapper'>
+              <span
+                className='pagination-arrow'
+                onClick={() => {
+                  dispatch(setPageNumber(pageNumber - 1))
+                  if (props.antiques === true) {
+                    dispatch(getAntiques(token, pageNumber - 1))
+                  } else {
+                    dispatch(getHandmade(token, pageNumber - 1))
+                  }
+                }}
+              >
+                {'<'}
+              </span>
+              {pageNumber - 1 < 0 ? (
+                ''
+              ) : (
+                <span className='pagination-inactive-item'>
+                  {pageNumber - 1}
+                </span>
+              )}
+              <span className='pagination-active-item'>{pageNumber}</span>
+              <span className='pagination-inactive-item'>{pageNumber + 1}</span>
+              <span
+                className='pagination-arrow'
+                onClick={() => {
+                  dispatch(setPageNumber(pageNumber + 1))
+                  if (props.antiques === true) {
+                    dispatch(getAntiques(token, pageNumber + 1))
+                  } else {
+                    dispatch(getHandmade(token, pageNumber + 1))
+                  }
+                }}
+              >
+                {'>'}
+              </span>
+            </div>
           </div>
         </Container>
       </div>
