@@ -37,7 +37,7 @@ const InnerHeader = () => {
             <Nav.Link href=''>Featured</Nav.Link>
             <Nav.Link href='/antiques'>Antiques</Nav.Link>
             <Nav.Link href='/handmade'>Handmade</Nav.Link>
-            <Nav.Link href=''>Bargain</Nav.Link>
+            <Nav.Link href='/post-request'>Post Request</Nav.Link>
             <Nav.Link className='header-icon'>
               <Form className='d-flex'>
                 <FormControl

@@ -1,27 +1,27 @@
 import { useState } from 'react'
-import { DropdownItem, Dropdown, DropdownToggle } from 'reactstrap'
-
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 import './Components.css'
 
 const DropdownMenu = (props) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-
-  const toggle = () => {
-    setDropdownOpen(!dropdownOpen)
-  }
-
+  const [selectedValue, setSelectedValue] = useState(props.title)
   return (
     <div className='dropdown-component mt-3'>
-      <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-        <DropdownToggle caret>Dropdown</DropdownToggle>
-        <DropdownMenu>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem disabled>Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Another Action</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+      <DropdownButton id='dropdown-basic-button' title={selectedValue}>
+        {props.options && props.options.length > 0 ? (
+          props.options.map((option, index) => (
+            <Dropdown.Item
+              key={index}
+              onClick={() => {
+                setSelectedValue(option)
+              }}
+            >
+              {option}
+            </Dropdown.Item>
+          ))
+        ) : (
+          <Dropdown.Item disabled>Loading...</Dropdown.Item>
+        )}
+      </DropdownButton>
     </div>
   )
 }

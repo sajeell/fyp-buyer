@@ -1,5 +1,5 @@
 import { Container, Form } from 'react-bootstrap'
-import { AttachmentOutlined, HelpOutlineOutlined } from '@mui/icons-material'
+import { AttachmentOutlined } from '@mui/icons-material'
 import Footer from '../Footer/Footer'
 import TextArea from '../../components/TextArea'
 import InnerHeader from '../InnerHeader/InnerHeader'
@@ -7,6 +7,8 @@ import InnerHeader from '../InnerHeader/InnerHeader'
 import './Bargain.css'
 import Button from '../../components/Button'
 import DropdownMenu from '../../components/DropdownMenu'
+import NumberInput from '../../components/NumberInput'
+import HelpTip from '../../components/Tip'
 
 const PostRequest = () => {
   return (
@@ -28,13 +30,23 @@ const PostRequest = () => {
           <Form className='postrequest-form p-3 mb-5'>
             <p className='form-label pr-5'>
               Describe the product you're looking to purchase - please be as
-              detailed as possible:{' '}
-              <HelpOutlineOutlined fontSize='14' className='hover' />
+              detailed as possible: <HelpTip />
             </p>
             <TextArea placeholder={"I'm looking for"} />
             <Button text='Attach Images' icon={<AttachmentOutlined />} />
             <p className='form-label mt-3'>Choose a category:</p>
-            <DropdownMenu />
+            <DropdownMenu title='Select...' options={['Antique', 'Handmade']} />
+            <p className='form-label mt-3'>
+              What is your budget amount right now ?
+            </p>
+            <NumberInput reverse={false} />
+            <p className='form-label mt-3'>What is your highest budget ?</p>
+            <NumberInput reverse={true} />
+            <p className='form-label mt-3'>What amount satisfies you well ?</p>
+            <NumberInput reverse={false} />
+            <div className='justify-content-end'>
+              <Button text='Submit Request' />
+            </div>
           </Form>
         </Container>
       </div>
