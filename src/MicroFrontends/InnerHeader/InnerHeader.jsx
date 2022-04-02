@@ -7,14 +7,13 @@ import {
   FormControl,
   Button,
 } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/user/user.action'
 
 import './Header.css'
 
-import searchIcon from './img/search.svg'
 import cartIcon from './img/cart.svg'
-import { useEffect } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 
 const InnerHeader = () => {

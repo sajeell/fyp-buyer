@@ -4,3 +4,39 @@
   text-align: left;
   color: #707070;
 }
+
+textarea {
+  height: 100px;
+}
+
+.form-label {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+  color: #707070;
+}
+
+.page-button,
+.page-button:hover,
+.page-button:active,
+.page-button:focus {
+  background-color: #707070;
+  border: none;
+  box-shadow: none !important;
+}
+
+.page-button:active {
+  transform: translateY(2px);
+  background-color: #6b6a6a;
+}
+
+.hover:hover {
+  cursor: pointer;
+  transform: translateY(-1px);
+}
+
+@media screen and (max-width: 500px) {
+  .page-heading {
+    font-size: 20px;
+  }
+}

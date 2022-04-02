@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { getFeaturedProducts } from '../../redux/product/product.action'
 import { useNavigate } from 'react-router-dom'
-import Footer from '../Footer/Footer'
+
 import { loading } from '../../redux/loader/loader.action'
 
 const Landing = () => {

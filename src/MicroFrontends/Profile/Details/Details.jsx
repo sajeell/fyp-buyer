@@ -1,4 +1,4 @@
-import { Container, Table } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Footer from '../../Footer/Footer'
 import InnerHeader from '../../InnerHeader/InnerHeader'
 import ProfileSidebar from '../Sidebar/ProfileSidebar'
