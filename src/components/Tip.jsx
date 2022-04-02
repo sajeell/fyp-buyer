@@ -15,10 +15,8 @@ const customStyles = {
     width: 244,
     height: 260,
     background: '#ecfcff',
-    paddingLeft: '1%',
-    paddingRight: '1.5%',
-    border: 'none',
-    overflow: 'hidden',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 }
 
