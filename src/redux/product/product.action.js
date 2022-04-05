@@ -45,6 +45,16 @@ export const setBiddingCartDetails = (details) => ({
   payload: details,
 })
 
+export const setProductBiddingDetails = (details) => ({
+  type: ActionsType.SET_PRODUCT_BIDDING_DETAILS,
+  payload: details,
+})
+
+export const verifyBidding = (verify) => ({
+  type: ActionsType.SET_VERIFY_BIDDING,
+  payload: verify,
+})
+
 export const getFeaturedProducts = (token) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
@@ -266,6 +276,115 @@ export const getBiddingCartDetails = (token, id) => {
           if (Array.isArray(response)) {
             dispatch(setBiddingCartDetails(response))
           }
+        }
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const getProductBiddingDetails = (token, productID) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+
+    axios
+      .get(`${Url}bidding/by/product_id/${productID}`, {
+        headers: headers,
+      })
+      .then((resp) => {
+        if (resp.status === 404) {
+          dispatch(setProductBiddingDetails({}))
+          return
+        }
+        if (resp.data) {
+          let response = resp.data
+          dispatch(setProductBiddingDetails(response))
+        }
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const verifyBid = (token, data) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+
+    axios
+      .post(`${Url}bidding/verify`, data, {
+        headers: headers,
+      })
+      .then((resp) => {
+        if (resp.status === 404) {
+          dispatch(verifyBidding(false))
+          return
+        }
+        if (resp.data) {
+          let response = resp.data
+          dispatch(verifyBidding(response.verified))
+        }
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const participantBid = (token, data) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+
+    axios
+      .post(`${Url}bidding/add/participant`, data, {
+        headers: headers,
+      })
+      .then((resp) => {
+        if (resp.status === 200 || resp.status === 201) {
+          toast.success('Success')
         }
       })
       .catch((error) => {

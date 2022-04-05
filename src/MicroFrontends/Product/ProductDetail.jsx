@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
+import { Container, ToastContainer } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment'
+import { useParams } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
 
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
 import BiddingTab from './Tabs/BiddingTab'
 import ReviewTab from './Tabs/ReviewTab'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
 
 import guitarImage from './img/itemThree.png'
 import orangeStar from './img/orangeStar.svg'
-import { getProduct } from '../../redux/product/product.action'
+import {
+  getProduct,
+  getProductBiddingDetails,
+  participantBid,
+  verifyBid,
+} from '../../redux/product/product.action'
 
 import './Product.css'
 import BiddingDetailsModal from './Modals/BiddingDetailsModal'
-import { Container } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
 import constants from '../../constants/constants'
+import { toast } from 'react-toastify'
 
 const customStyles = {
   content: {
@@ -36,7 +43,14 @@ const ProductDetail = () => {
   const [tabState, setTabState] = useState(0)
   const [modalIsOpen, setIsOpen] = React.useState(false)
   const [productID, setProductID] = useState('')
+  const [maximumPrice, setMaximumPrice] = useState()
+  const [email, setEmail] = useState()
   const productDetail = useSelector((state) => state.product.productDetail)
+  const verifyBidding = useSelector((state) => state.product.verifyBidding)
+
+  const productBiddingDetails = useSelector(
+    (state) => state.product.productBiddingDetails,
+  )
   const token = useSelector((state) => state.user.token)
 
   const { id } = useParams()
@@ -54,6 +68,52 @@ const ProductDetail = () => {
     dispatch(getProduct(token, id))
   }
 
+  const fetchVerifyBidding = async () => {
+    if (token) {
+      const id = jwt_decode(token)._id
+      const body = { userID: id, productID: productID }
+      dispatch(verifyBid(token, body))
+    }
+  }
+
+  const getProductBiddingDetailsAPI = async () => {
+    dispatch(getProductBiddingDetails(token, id))
+  }
+
+  const bid = () => {
+    const id = jwt_decode(token)._id
+
+    if (maximumPrice < productBiddingDetails.minPrice) {
+      toast.error(
+        'Maximum price should be greater than the bidding minimum price',
+      )
+      return
+    }
+
+    if (email.length < 1) {
+      toast.error('Email field is required')
+      return
+    }
+
+    const body = {
+      biddingID: productBiddingDetails._id,
+      userID: id,
+      email: email,
+      maxPrice: maximumPrice,
+    }
+
+    dispatch(participantBid(token, body))
+    closeModal()
+  }
+
+  useEffect(() => {
+    getProductBiddingDetailsAPI()
+  }, [token])
+
+  useEffect(() => {
+    fetchVerifyBidding()
+  })
+
   useEffect(() => {
     getProductDetail()
   }, [id])
@@ -63,6 +123,7 @@ const ProductDetail = () => {
       <Container>
         <div className='productdetail-wrapper'>
           <InnerHeader />
+          <ToastContainer />
           <div className='productdetail-top'>
             <div className='breadcrumbs'>
               <a href='/landing' className='breadcrumbs-link'>
@@ -113,7 +174,12 @@ const ProductDetail = () => {
                     </div>
                   </div>
                   <span>
-                    Starts from <strong>25000/-</strong>
+                    Starts from{' '}
+                    <strong>
+                      {productBiddingDetails && productBiddingDetails.minPrice
+                        ? productBiddingDetails.minPrice
+                        : 2500}
+                    </strong>
                   </span>
                   <p className='productdetail-description'>
                     {productDetail
@@ -126,7 +192,12 @@ const ProductDetail = () => {
                   <span id='warranty-text'>6 months seller warranty</span>
                   <div style={{ marginTop: '3%' }}></div>
                   <p>
-                    Bid starts in <strong>2 days</strong>
+                    Bid starts{' '}
+                    <strong>
+                      {moment(productBiddingDetails.startsOn)
+                        .startOf('hour')
+                        .fromNow()}{' '}
+                    </strong>
                   </p>
                   <div className='productdetail-tabs'>
                     <div
@@ -164,9 +235,16 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 <div className='productdetail-content-right'>
-                  <div className='button' onClick={openModal}>
-                    <span>Bid</span>
-                  </div>
+                  <button
+                    className='button'
+                    onClick={openModal}
+                    disabled={verifyBidding}
+                    style={{
+                      cursor: verifyBidding === true ? 'not-allowed' : 'cursor',
+                    }}
+                  >
+                    Bid
+                  </button>
                   <Modal
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
@@ -174,7 +252,20 @@ const ProductDetail = () => {
                     style={customStyles}
                     contentLabel='Example Modal'
                   >
-                    <BiddingDetailsModal onClose={closeModal} />
+                    <BiddingDetailsModal
+                      onClose={closeModal}
+                      minPrice={productBiddingDetails.minPrice}
+                      maximumPrice={maximumPrice}
+                      incrementPrice={productBiddingDetails.incrementPrice}
+                      email={email}
+                      onEmailChange={(e) => {
+                        setEmail(e.target.value)
+                      }}
+                      onChange={(e) => {
+                        setMaximumPrice(e.target.value)
+                      }}
+                      onClick={bid}
+                    />
                   </Modal>
                 </div>
               </div>

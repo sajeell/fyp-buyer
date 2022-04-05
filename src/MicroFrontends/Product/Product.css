@@ -116,6 +116,8 @@
   background-color: #707070;
   color: white;
   border-radius: 10px;
+  border: none;
+  outline: none;
 }
 
 /* Bidding Tab */

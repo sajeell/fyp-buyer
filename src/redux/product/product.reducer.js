@@ -4,10 +4,12 @@ const INITIAL_STATE = {
   featuredProducts: [],
   featuredAntiques: [],
   featuredHandmade: [],
-  productDetail: {},
   antiques: [],
   handmade: [],
   biddingCartDetails: [],
+  productDetail: {},
+  productBiddingDetails: {},
+  verifyBidding: false,
   page: 0,
   error: {},
   response: {},
@@ -54,6 +56,16 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         biddingCartDetails: action.payload,
+      }
+    case ActionsType.SET_PRODUCT_BIDDING_DETAILS:
+      return {
+        ...state,
+        productBiddingDetails: action.payload,
+      }
+    case ActionsType.SET_VERIFY_BIDDING:
+      return {
+        ...state,
+        verifyBidding: action.payload,
       }
     default:
       return state
