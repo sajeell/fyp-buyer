@@ -19,6 +19,7 @@ import Footer from '../Footer/Footer'
 
 import item from './img/itemThree.png'
 import { loading } from '../../redux/loader/loader.action'
+import constants from '../../constants/constants'
 
 const Products = (props) => {
   const dispatch = useDispatch()
@@ -87,7 +88,15 @@ const Products = (props) => {
                     </div>
                     <div className='featured-box-right'>
                       <span id='featured-time'>starts from 25000/-</span>
-                      <img src={item} alt='Guitar' id='product-img' />
+                      <img
+                        src={
+                          product.images && product.images.length > 0
+                            ? `${constants.cloudinaryURL}${product.images[0]}`
+                            : item
+                        }
+                        alt='Guitar'
+                        id='product-img'
+                      />
                     </div>
                   </Card>
                 ))
@@ -111,7 +120,15 @@ const Products = (props) => {
                       <span id='featured-time'>bidding in 2 months</span>
                     </div>
                     <div className='list-img-container'>
-                      <img src={item} alt='Guitar' id='list-img' />
+                      <img
+                        src={
+                          antique.images && antique.images.length > 0
+                            ? `${constants.cloudinaryURL}${antique.images[0]}`
+                            : item
+                        }
+                        alt='Guitar'
+                        id='list-img'
+                      />
                     </div>
                   </Card>
                 ))

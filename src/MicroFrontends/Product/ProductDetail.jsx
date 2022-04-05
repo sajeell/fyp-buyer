@@ -16,6 +16,7 @@ import './Product.css'
 import BiddingDetailsModal from './Modals/BiddingDetailsModal'
 import { Container } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import constants from '../../constants/constants'
 
 const customStyles = {
   content: {
@@ -80,7 +81,14 @@ const ProductDetail = () => {
             </div>
             <div className='productdetail'>
               <div className='productdetail-images'>
-                <img src={guitarImage} alt='Product' />
+                <img
+                  src={
+                    productDetail.images && productDetail.images.length > 0
+                      ? `${constants.cloudinaryURL}${productDetail.images[0]}`
+                      : guitarImage
+                  }
+                  alt='Product'
+                />
               </div>
               <div className='productdetail-content'>
                 <div className='productdetail-content-left'>

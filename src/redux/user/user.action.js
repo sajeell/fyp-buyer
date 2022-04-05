@@ -1,10 +1,10 @@
 import ActionsType from '../utils/actions.type'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import URL from '../../constants/constants'
+import constants from '../../constants/constants'
 import { loading } from '../loader/loader.action'
 
-const Url = URL
+const Url = constants.URL
 
 export const setCurrentUser = (user) => ({
   type: ActionsType.SET_CURRENT_USER,

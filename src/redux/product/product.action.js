@@ -1,9 +1,9 @@
 import ActionsType from '../utils/actions.type'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import URL from '../../constants/constants'
+import constants from '../../constants/constants'
 
-const Url = URL
+const Url = constants.URL
 
 export const setFeaturedProducts = (product) => ({
   type: ActionsType.FEATURED_PRODUCTS,
