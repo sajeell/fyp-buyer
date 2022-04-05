@@ -40,6 +40,11 @@ export const setPageNumber = (page) => ({
   payload: page < 0 ? 0 : page,
 })
 
+export const setBiddingCartDetails = (details) => ({
+  type: ActionsType.SET_BIDDING_CART_DETAILS,
+  payload: details,
+})
+
 export const getFeaturedProducts = (token) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
@@ -224,6 +229,44 @@ export const getProduct = (token, id) => {
       .then((resp) => {
         let response = resp.data
         dispatch(setProductDetail(response))
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const getBiddingCartDetails = (token, id) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+
+    axios
+      .get(`${Url}bidding/buyer/cart/${id}`, { headers: headers })
+      .then((resp) => {
+        if (resp.status === 404) {
+          dispatch(setBiddingCartDetails([]))
+          return
+        }
+        if (resp.data) {
+          let response = resp.data
+          if (Array.isArray(response)) {
+            dispatch(setBiddingCartDetails(response))
+          }
+        }
       })
       .catch((error) => {
         const err = error

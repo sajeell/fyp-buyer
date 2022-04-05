@@ -1,11 +1,57 @@
 import { Container, Button, Table } from 'react-bootstrap'
+import jwt_decode from 'jwt-decode'
+import { useDispatch, useSelector } from 'react-redux'
+import { getBiddingCartDetails } from '../../redux/product/product.action'
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
 import './Cart.css'
 
 import guitarImage from './img/itemThree.png'
+import { useEffect } from 'react'
 
 const Cart = () => {
+  const dispatch = useDispatch()
+  const token = useSelector((state) => state.user.token)
+  const biddingCartData = useSelector(
+    (state) => state.product.biddingCartDetails,
+  )
+
+  const month = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
+
+  const convertToNormalDate = (dateArg) => {
+    const date = new Date(dateArg)
+
+    return `${date.getDate()} ${month[date.getMonth()]},${date.getFullYear()}`
+  }
+
+  const fetchBiddingCart = () => {
+    if (token) {
+      const id = jwt_decode(token)._id
+      dispatch(getBiddingCartDetails(token, id))
+    }
+  }
+
+  useEffect(() => {
+    fetchBiddingCart(token)
+  }, [token])
+
+  useEffect(() => {
+    console.log(biddingCartData)
+  }, [biddingCartData])
+
   return (
     <div className='cart-wrapper'>
       <Container>
@@ -27,61 +73,44 @@ const Cart = () => {
           <Table striped bordered hover responsive>
             <thead>
               <tr>
+                <th>S. #</th>
                 <th>ITEM</th>
-                <th>REQUESTED ON</th>
-                <th>REQUESTS</th>
+                <th>BIDDED ON</th>
+                <th>PAYABLE AMOUNT</th>
                 <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className='table-img-container'>
-                  <img src={guitarImage} alt='Guitar' />
-                  <span>Acoustic Guitar</span>
-                </td>
-                <td>2021-10-12</td>
-                <td>12</td>
-                <td>
-                  <Button
-                    variant='outline-info px-4'
-                    style={{ borderRadius: 50 }}
-                  >
-                    View Details
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td className='table-img-container'>
-                  <img src={guitarImage} alt='Guitar' />
-                  <span>Acoustic Guitar</span>
-                </td>
-                <td>2021-10-12</td>
-                <td>12</td>
-                <td>
-                  <Button
-                    variant='outline-info px-4'
-                    style={{ borderRadius: 50 }}
-                  >
-                    View Details
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td className='table-img-container'>
-                  <img src={guitarImage} alt='Guitar' />
-                  <span>Acoustic Guitar</span>
-                </td>
-                <td>2021-10-12</td>
-                <td>12</td>
-                <td>
-                  <Button
-                    variant='outline-info px-4'
-                    style={{ borderRadius: 50 }}
-                  >
-                    View Details
-                  </Button>
-                </td>
-              </tr>
+              {biddingCartData && biddingCartData.length > 0 ? (
+                biddingCartData.map((item, index) => (
+                  <tr key={index}>
+                    <td>{index}</td>
+                    <td className='table-img-container'>
+                      <img
+                        src={
+                          item.product.images.length > 0
+                            ? `https://res.cloudinary.com/barganttic/image/upload/${item.product.images[0]}`
+                            : guitarImage
+                        }
+                        alt='Guitar'
+                      />
+                      <span>{item.product.title}</span>
+                    </td>
+                    <td>{convertToNormalDate(item.bidding.createdAt)}</td>
+                    <td>{item.bidding.winningPrice}</td>
+                    <td>
+                      <Button
+                        variant='outline-info px-4'
+                        style={{ borderRadius: 50 }}
+                      >
+                        PAYMENT
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>loading...</tr>
+              )}
             </tbody>
           </Table>
           <br />

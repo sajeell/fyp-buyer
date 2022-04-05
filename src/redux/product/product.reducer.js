@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   productDetail: {},
   antiques: [],
   handmade: [],
+  biddingCartDetails: [],
   page: 0,
   error: {},
   response: {},
@@ -48,6 +49,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         page: action.payload,
+      }
+    case ActionsType.SET_BIDDING_CART_DETAILS:
+      return {
+        ...state,
+        biddingCartDetails: action.payload,
       }
     default:
       return state
