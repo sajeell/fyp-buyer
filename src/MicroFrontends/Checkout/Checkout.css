@@ -1,0 +1,33 @@
+.productdetail-form {
+  padding: 2%;
+  background: #ecfcff;
+  width: 35vw;
+  margin-bottom: 45px;
+}
+
+.productdetail-form .table-img-container img {
+  border-radius: 10px;
+  background: #dae3eb;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.productdetail-form .table-img-container span {
+  color: #707070;
+  font-size: 14px;
+}
+
+.productdetail-form .row {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.productdetail-form .row #heading-product-price,
+.productdetail-form .row #text-product-price {
+  font-size: 14px;
+}
+
+.productdetail-form .row #total-product-price {
+  font-size: 17px;
+  font-weight: bold;
+}

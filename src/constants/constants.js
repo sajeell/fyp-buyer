@@ -7,7 +7,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 const cloudinaryURL = 'https://res.cloudinary.com/barganttic/image/upload/'
 
 const constants = {
-  URL: URL,
+  URL: 'https://barganttic.herokuapp.com/',
   cloudinaryURL: cloudinaryURL,
 }
 // URL = 'https://barganttic.herokuapp.com/'
