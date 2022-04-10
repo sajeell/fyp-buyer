@@ -55,6 +55,11 @@ export const verifyBidding = (verify) => ({
   payload: verify,
 })
 
+export const setIntermediaryID = (id) => ({
+  type: ActionsType.SET_INTERMEDIARY_ID,
+  payload: id,
+})
+
 export const getFeaturedProducts = (token) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
@@ -386,6 +391,63 @@ export const participantBid = (token, data) => {
         if (resp.status === 200 || resp.status === 201) {
           toast.success('Success')
         }
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const getProductViaIntermediary = (token, id) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+    axios
+      .get(`${Url}intermediary/product/by/${id}`, { headers: headers })
+      .then((resp) => {
+        let response = resp.data
+        dispatch(setProductDetail(response))
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const postDeductIntermediaryCommission = (token, data) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+    axios
+      .post(`${Url}intermediary/deduct/commission`, data, { headers: headers })
+      .then((resp) => {
+        alert('Success')
       })
       .catch((error) => {
         const err = error

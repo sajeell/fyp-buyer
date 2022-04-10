@@ -16,6 +16,7 @@ import History from './MicroFrontends/Profile/History/History'
 import Details from './MicroFrontends/Profile/Details/Details'
 import PostRequest from './MicroFrontends/Bargain/PostRequest'
 import Checkout from './MicroFrontends/Checkout/Checkout'
+import IntermediaryProductDetail from './MicroFrontends/Product/IntermediaryProductDetail'
 
 const override = `
   display: block;
@@ -58,6 +59,11 @@ function App() {
         <Route exact path='/details' element={<Details />} />
         <Route exact path='/post-request' element={<PostRequest />} />
         <Route exact path='/checkout' element={<Checkout />} />
+        <Route
+          exact
+          path='/intermediary/:id'
+          element={<IntermediaryProductDetail />}
+        />
 
         <Route
           exact

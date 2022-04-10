@@ -1,6 +1,7 @@
 import { Container, Form, InputGroup, Row, Col } from 'react-bootstrap'
 import { useEffect, useReducer, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import jwt_decode from 'jwt-decode'
 import Button from '../../components/Button'
 import TextArea from '../../components/TextArea'
 import Footer from '../Footer/Footer'
@@ -9,26 +10,41 @@ import guitarImage from './img/itemThree.png'
 
 import './Checkout.css'
 import { checkout } from '../../redux/order/order.action'
+import { postDeductIntermediaryCommission } from '../../redux/product/product.action'
 
 const Checkout = () => {
   const dispatch = useDispatch()
   const product = useSelector((state) => state.order.product)
   const bidding = useSelector((state) => state.order.bidding)
-  const buyerID = useSelector((state) => state.order.buyerID)
   const token = useSelector((state) => state.user.token)
+
   const [address, setAddress] = useState('')
 
   const checkoutAPI = () => {
-    const body = {
-      buyerID: buyerID,
-      address: address,
-      productID: product._id,
-      biddingID: bidding._id,
-      price: bidding.winningPrice,
-      sellerID: product.sellerID,
-    }
-
     if (token) {
+      const buyerID = jwt_decode(token)._id
+      const body = {
+        buyerID: buyerID,
+        address: address,
+        productID: product._id,
+        biddingID: bidding._id,
+        price: bidding.winningPrice,
+        sellerID: product.sellerID,
+      }
+
+      const intermediaryID = localStorage.getItem('intermediaryID')
+        ? localStorage.getItem('intermediaryID')
+        : null
+      if (intermediaryID !== null) {
+        const intermediaryBody = {
+          intermediaryID: intermediaryID,
+          totalPrice: bidding.winningPrice,
+          sellerID: product.sellerID,
+        }
+        dispatch(postDeductIntermediaryCommission(token, intermediaryBody))
+        localStorage.removeItem('intermediaryID')
+      }
+
       dispatch(checkout(token, body))
     }
   }
