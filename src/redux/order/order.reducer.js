@@ -3,6 +3,7 @@ import ActionsType from './../utils/actions.type'
 const INITIAL_STATE = {
   biddingID: '',
   buyerID: '',
+  sellerID: '',
   productID: '',
   address: '',
   price: 0,
@@ -43,6 +44,11 @@ const orderReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         product: action.payload,
+      }
+    case ActionsType.SET_SELLER_ID:
+      return {
+        ...state,
+        sellerID: action.payload,
       }
     case ActionsType.SET_CHECKOUT_BIDDING:
       return {

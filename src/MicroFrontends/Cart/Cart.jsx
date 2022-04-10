@@ -17,6 +17,7 @@ import {
   setPrice,
   setProduct,
   setProductID,
+  setSellerID,
 } from '../../redux/order/order.action'
 
 const Cart = () => {
@@ -55,7 +56,14 @@ const Cart = () => {
     }
   }
 
-  const storePaymentData = (biddingID, productID, price, product, bidding) => {
+  const storePaymentData = (
+    biddingID,
+    productID,
+    price,
+    product,
+    bidding,
+    sellerID,
+  ) => {
     if (token) {
       const id = jwt_decode(token)._id
       dispatch(setBiddingID(biddingID))
@@ -64,6 +72,7 @@ const Cart = () => {
       dispatch(setPrice(price))
       dispatch(setProduct(product))
       dispatch(setBidding(bidding))
+      dispatch(setSellerID(sellerID))
 
       return navigate('/checkout')
     }
@@ -130,6 +139,7 @@ const Cart = () => {
                             item.bidding.winningPrice,
                             item.product,
                             item.bidding,
+                            item.sellerID,
                           )
                         }}
                       >

@@ -10,6 +10,11 @@ export const setBiddingID = (id) => ({
   payload: id,
 })
 
+export const setSellerID = (id) => ({
+  type: ActionsType.SET_SELLER_ID,
+  payload: id,
+})
+
 export const setProductID = (id) => ({
   type: ActionsType.SET_PRODUCT_ID,
   payload: id,
