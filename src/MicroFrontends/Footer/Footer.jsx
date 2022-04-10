@@ -1,10 +1,7 @@
-/*!
-
-*/
 /*eslint-disable*/
 import React from 'react'
-// reactstrap components
 import { Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap'
+
 import './Footer.css'
 const Footer = () => {
   return (
@@ -79,11 +76,11 @@ const Footer = () => {
               </Nav>
             </Col>
             <Col md='3'>
-              <h2 className='foothead'>PROVIDER</h2>
+              <h2 className='foothead'>SELLER</h2>
               <Nav className=' ml-lg-auto footlink' navbar>
                 <NavItem>
                   <NavLink className='footlink' href='#' target='_blank'>
-                    <p>Host your home </p>
+                    <p>Add your Product </p>
                   </NavLink>
                 </NavItem>
                 <NavItem>

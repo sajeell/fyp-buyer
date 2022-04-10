@@ -1,5 +1,6 @@
 import { Container, Form, InputGroup, Row, Col } from 'react-bootstrap'
-import { Input } from 'reactstrap'
+import { useEffect, useReducer, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button'
 import TextArea from '../../components/TextArea'
 import Footer from '../Footer/Footer'
@@ -7,8 +8,30 @@ import InnerHeader from '../InnerHeader/InnerHeader'
 import guitarImage from './img/itemThree.png'
 
 import './Checkout.css'
+import { checkout } from '../../redux/order/order.action'
 
 const Checkout = () => {
+  const dispatch = useDispatch()
+  const product = useSelector((state) => state.order.product)
+  const bidding = useSelector((state) => state.order.bidding)
+  const buyerID = useSelector((state) => state.order.buyerID)
+  const token = useSelector((state) => state.user.token)
+  const [address, setAddress] = useState('')
+
+  const checkoutAPI = () => {
+    const body = {
+      buyerID: buyerID,
+      address: address,
+      productID: product._id,
+      biddingID: bidding._id,
+      price: bidding.winningPrice,
+    }
+
+    if (token) {
+      dispatch(checkout(token, body))
+    }
+  }
+
   return (
     <div className='checkout-wrapper'>
       <InnerHeader />
@@ -34,9 +57,13 @@ const Checkout = () => {
               />
             </InputGroup>
             <p className='form-label pr-5 mt-3'>Address Details</p>
-            <TextArea placeholder={'Street Address'} />
+            <TextArea
+              placeholder={'Street Address'}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
             <div className='justify-content-end'>
-              <Button text='Checkout' />
+              <Button text='Checkout' onClick={checkoutAPI} />
             </div>
           </Form>
           <Form className='productdetail-form'>
@@ -49,12 +76,21 @@ const Checkout = () => {
             >
               <Col>
                 <div className='table-img-container'>
-                  <img src={guitarImage} alt='Guitar' />
-                  <span>Acoustic Guitar</span>
+                  <img
+                    src={
+                      product.images.length > 0
+                        ? `https://res.cloudinary.com/barganttic/image/upload/${product.images[0]}`
+                        : guitarImage
+                    }
+                    alt='Guitar'
+                  />
+                  <span>{product.title ?? 'title'}</span>
                 </div>
               </Col>
               <Col style={{ textAlign: 'right' }}>
-                <span id='text-product-price'>2500 /-</span>
+                <span id='text-product-price'>
+                  {bidding.winningPrice ?? 0} /-
+                </span>
               </Col>
             </Row>
             <Row
@@ -72,7 +108,9 @@ const Checkout = () => {
                 <span id='heading-product-price'>Subtotal</span>
               </Col>
               <Col style={{ textAlign: 'right' }}>
-                <span id='text-product-price'>2500 /-</span>
+                <span id='text-product-price'>
+                  {bidding.winningPrice ?? 0} /-
+                </span>
               </Col>
             </Row>
             <Row>
@@ -98,7 +136,9 @@ const Checkout = () => {
                 <span id='heading-product-price'>Total</span>
               </Col>
               <Col style={{ textAlign: 'right' }}>
-                <span id='total-product-price'>2500 PKR</span>
+                <span id='total-product-price'>
+                  {bidding.winningPrice ?? 0} PKR
+                </span>
               </Col>
             </Row>
           </Form>

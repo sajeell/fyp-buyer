@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { useState } from 'react'
 import './App.css'
 import { ToastContainer } from 'react-toastify'

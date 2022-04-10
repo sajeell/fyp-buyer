@@ -4,7 +4,12 @@ import './Components.css'
 const TextArea = (props) => {
   return (
     <div className='textarea'>
-      <Input type='textarea' placeholder={props.placeholder} />
+      <Input
+        type='textarea'
+        placeholder={props.placeholder}
+        value={props.value}
+        onChange={props.onChange}
+      />
     </div>
   )
 }

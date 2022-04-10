@@ -5,7 +5,11 @@ import './Components.css'
 const Button = (props) => {
   return (
     <div className='button-component mt-3'>
-      <ButtonBootstrap className='page-button' color='#707070'>
+      <ButtonBootstrap
+        className='page-button'
+        color='#707070'
+        onClick={props.onClick}
+      >
         {props.text} {props.icon ? props.icon : ''}
       </ButtonBootstrap>
     </div>

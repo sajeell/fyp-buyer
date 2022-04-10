@@ -1,16 +1,27 @@
+import { useEffect } from 'react'
 import { Container, Button, Table } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 import { getBiddingCartDetails } from '../../redux/product/product.action'
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
 import './Cart.css'
 
 import guitarImage from './img/itemThree.png'
-import { useEffect } from 'react'
+import {
+  setBidding,
+  setBiddingID,
+  setBuyerID,
+  setPrice,
+  setProduct,
+  setProductID,
+} from '../../redux/order/order.action'
 
 const Cart = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const token = useSelector((state) => state.user.token)
   const biddingCartData = useSelector(
     (state) => state.product.biddingCartDetails,
@@ -44,13 +55,23 @@ const Cart = () => {
     }
   }
 
+  const storePaymentData = (biddingID, productID, price, product, bidding) => {
+    if (token) {
+      const id = jwt_decode(token)._id
+      dispatch(setBiddingID(biddingID))
+      dispatch(setBuyerID(id))
+      dispatch(setProductID(productID))
+      dispatch(setPrice(price))
+      dispatch(setProduct(product))
+      dispatch(setBidding(bidding))
+
+      return navigate('/checkout')
+    }
+  }
+
   useEffect(() => {
     fetchBiddingCart(token)
   }, [token])
-
-  useEffect(() => {
-    console.log(biddingCartData)
-  }, [biddingCartData])
 
   return (
     <div className='cart-wrapper'>
@@ -69,7 +90,7 @@ const Cart = () => {
       <hr />
       <Container style={{ minHeight: '100vh' }}>
         <div className='cart-container'>
-          <p className='page-subtitle'>BARGAIN</p>
+          <p className='page-subtitle'>BID</p>
           <Table striped bordered hover responsive>
             <thead>
               <tr>
@@ -102,6 +123,15 @@ const Cart = () => {
                       <Button
                         variant='outline-info px-4'
                         style={{ borderRadius: 50 }}
+                        onClick={() => {
+                          storePaymentData(
+                            item.bidding._id,
+                            item.product._id,
+                            item.bidding.winningPrice,
+                            item.product,
+                            item.bidding,
+                          )
+                        }}
                       >
                         PAYMENT
                       </Button>
@@ -114,7 +144,7 @@ const Cart = () => {
             </tbody>
           </Table>
           <br />
-          <p className='page-subtitle'>BID</p>
+          <p className='page-subtitle'>BARGAIN</p>
           <Table striped bordered hover responsive>
             <thead>
               <tr>
