@@ -25,6 +25,7 @@ const Checkout = () => {
       productID: product._id,
       biddingID: bidding._id,
       price: bidding.winningPrice,
+      sellerID: product.sellerID,
     }
 
     if (token) {
