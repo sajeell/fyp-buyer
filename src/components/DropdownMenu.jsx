@@ -6,14 +6,13 @@ const DropdownMenu = (props) => {
   const [selectedValue, setSelectedValue] = useState(props.title)
   return (
     <div className='dropdown-component mt-3'>
-      <DropdownButton id='dropdown-basic-button' title={selectedValue}>
+      <DropdownButton id='dropdown-basic-button' title={selectedValue} >
         {props.options && props.options.length > 0 ? (
           props.options.map((option, index) => (
             <Dropdown.Item
               key={index}
-              onClick={() => {
-                setSelectedValue(option)
-              }}
+              defaultValue={option.value}
+              onClick={() => props.onClick(props.options[index])}
             >
               {option}
             </Dropdown.Item>

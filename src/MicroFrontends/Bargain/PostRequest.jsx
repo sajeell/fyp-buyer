@@ -1,16 +1,61 @@
+import { AttachmentOutlined, DisabledByDefaultTwoTone } from '@mui/icons-material'
+import { useState } from 'react'
 import { Container, Form } from 'react-bootstrap'
-import { AttachmentOutlined } from '@mui/icons-material'
-import Footer from '../Footer/Footer'
-import TextArea from '../../components/TextArea'
-import InnerHeader from '../InnerHeader/InnerHeader'
-
-import './Bargain.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast, ToastContainer } from 'react-toastify'
 import Button from '../../components/Button'
 import DropdownMenu from '../../components/DropdownMenu'
 import NumberInput from '../../components/NumberInput'
+import TextArea from '../../components/TextArea'
 import HelpTip from '../../components/Tip'
+import Footer from '../Footer/Footer'
+import jwt_decode from "jwt-decode"
+import InnerHeader from '../InnerHeader/InnerHeader'
+import './Bargain.css'
+import { postRequest } from '../../redux/product/product.action'
+import ImageUploadService from '../../components/ImageUploadService'
 
 const PostRequest = () => {
+  const [description, setDescription] = useState('')
+  const [img, setImg] = useState('')
+  const [highestBudget, setHighestBudget] = useState(0)
+  const [category, setCategory] = useState('')
+
+  const dispatch = useDispatch()
+  const token = useSelector((state) => state.user.token)
+
+  const postRequestHelper = () => {
+    const buyerID = jwt_decode(token)._id
+
+    if (img.length < 1) {
+      toast.error('Image required')
+      return
+    }
+    if (description.length < 1) {
+      toast.error('Description required')
+      return
+    }
+
+    if (highestBudget.length < 1) {
+      toast.error('Budget required')
+      return
+    }
+    if (category.length < 1) {
+      toast.error('Category required')
+      return
+    }
+
+    const body = {
+      buyerID: buyerID,
+      description: description,
+      img: img,
+      highestBudget: highestBudget,
+      category: category
+    }
+
+    console.log(body)
+    dispatch(postRequest(token, body))
+  }
   return (
     <div className='postrequest-wrapper'>
       <div>
@@ -32,25 +77,20 @@ const PostRequest = () => {
               Describe the product you're looking to purchase - please be as
               detailed as possible: <HelpTip />
             </p>
-            <TextArea placeholder={"I'm looking for"} />
-            <Button text='Attach Images' icon={<AttachmentOutlined />} />
+            <TextArea placeholder={"I'm looking for"} value={description} onChange={(e) => setDescription(e.target.value)} />
+            <ImageUploadService onUpload={(url) => setImg(url)} />
             <p className='form-label mt-3'>Choose a category:</p>
-            <DropdownMenu title='Select...' options={['Antique', 'Handmade']} />
-            <p className='form-label mt-3'>
-              What is your budget amount right now ?
-            </p>
-            <NumberInput reverse={false} />
+            <DropdownMenu title='Select...' options={['Antique', 'Handmade']} onClick={(e) => setCategory(e)} />
             <p className='form-label mt-3'>What is your highest budget ?</p>
-            <NumberInput reverse={true} />
-            <p className='form-label mt-3'>What amount satisfies you well ?</p>
-            <NumberInput reverse={false} />
+            <NumberInput reverse={true} onChange={(e) => setHighestBudget(e.target.value)} />
             <div className='justify-content-end'>
-              <Button text='Submit Request' />
+              <Button text='Submit Request' onClick={postRequestHelper} />
             </div>
           </Form>
         </Container>
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   )
 }

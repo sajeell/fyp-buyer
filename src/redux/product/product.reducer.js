@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   productBiddingDetails: {},
   verifyBidding: false,
   intermediaryID: '',
+  requests: [],
   page: 0,
   error: {},
   response: {},
@@ -72,6 +73,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         intermediaryID: action.payload,
+      }
+    case ActionsType.SET_REQUESTS:
+      return {
+        ...state,
+        requests: action.payload,
       }
     default:
       return state

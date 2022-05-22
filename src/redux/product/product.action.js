@@ -60,6 +60,11 @@ export const setIntermediaryID = (id) => ({
   payload: id,
 })
 
+export const setRequests = (data) => ({
+  type: ActionsType.SET_REQUESTS,
+  payload: data,
+})
+
 export const getFeaturedProducts = (token) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
@@ -448,6 +453,76 @@ export const postDeductIntermediaryCommission = (token, data) => {
       .post(`${Url}intermediary/deduct/commission`, data, { headers: headers })
       .then((resp) => {
         alert('Success')
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const fetchRequests = (token) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+    axios
+      .get(`${Url}bargain`, { headers: headers })
+      .then((resp) => {
+        dispatch(setRequests(resp.data))
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const postRequest = (token, data) => {
+  return () => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+    axios
+      .post(`${Url}bargain/request`, data, { headers: headers })
+      .then((resp) => {
+        if (resp.status === 201 || resp.status === 200) {
+          toast.success('Success', {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        } else {
+          toast.error('Error', {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
       })
       .catch((error) => {
         const err = error

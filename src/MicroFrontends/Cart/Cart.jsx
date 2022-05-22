@@ -12,7 +12,7 @@ import {
   setProductID,
   setSellerID
 } from '../../redux/order/order.action'
-import { getBiddingCartDetails } from '../../redux/product/product.action'
+import { fetchRequests, getBiddingCartDetails } from '../../redux/product/product.action'
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
 import './Cart.css'
@@ -24,6 +24,10 @@ const Cart = () => {
   const token = useSelector((state) => state.user.token)
   const biddingCartData = useSelector(
     (state) => state.product.biddingCartDetails,
+  )
+
+  const bargainingCartData = useSelector(
+    (state) => state.product.requests,
   )
 
   const month = [
@@ -76,8 +80,16 @@ const Cart = () => {
     }
   }
 
+  const fetchRequestsHelper = (token) => {
+    dispatch(fetchRequests(token))
+  }
+
   useEffect(() => {
     fetchBiddingCart(token)
+  }, [token])
+
+  useEffect(() => {
+    fetchRequestsHelper(token)
   }, [token])
 
   return (
@@ -156,61 +168,47 @@ const Cart = () => {
           <Table striped bordered hover responsive>
             <thead>
               <tr>
+                <th>S. #</th>
                 <th>ITEM</th>
                 <th>REQUESTED ON</th>
-                <th>REQUESTS</th>
+                <th>FINAL PRICE</th>
                 <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className='table-img-container'>
-                  <img src={guitarImage} alt='Guitar' />
-                  <span>Acoustic Guitar</span>
-                </td>
-                <td>2021-10-12</td>
-                <td>12</td>
-                <td>
-                  <Button
-                    variant='outline-info px-4'
-                    style={{ borderRadius: 50 }}
-                  >
-                    View Details
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td className='table-img-container'>
-                  <img src={guitarImage} alt='Guitar' />
-                  <span>Acoustic Guitar</span>
-                </td>
-                <td>2021-10-12</td>
-                <td>12</td>
-                <td>
-                  <Button
-                    variant='outline-info px-4'
-                    style={{ borderRadius: 50 }}
-                  >
-                    View Details
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td className='table-img-container'>
-                  <img src={guitarImage} alt='Guitar' />
-                  <span>Acoustic Guitar</span>
-                </td>
-                <td>2021-10-12</td>
-                <td>12</td>
-                <td>
-                  <Button
-                    variant='outline-info px-4'
-                    style={{ borderRadius: 50 }}
-                  >
-                    View Details
-                  </Button>
-                </td>
-              </tr>
+              {bargainingCartData && bargainingCartData.length > 0 ? (
+                bargainingCartData.map((item, index) => (
+                  <tr key={index}>
+                    <td>{index}</td>
+                    <td className='table-img-container'>
+                      <img
+                        src={
+                          item.img && item.img.length > 0
+                            ? `https://res.cloudinary.com/barganttic/image/upload/${item.img}`
+                            : guitarImage
+                        }
+                        alt='Guitar'
+                      />
+                      <span>{item.description ?? 'description'}</span>
+                    </td>
+                    <td>{convertToNormalDate(item.createdAt)}</td>
+                    <td>{item.finalPrice ?? 200}</td>
+                    <td>
+                      <Button
+                        variant='outline-info px-4'
+                        style={{ borderRadius: 50 }}
+                        onClick={() => {
+                          console.log(1)
+                        }}
+                      >
+                        DETAILS
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>loading...</tr>
+              )}
             </tbody>
           </Table>
         </div>
