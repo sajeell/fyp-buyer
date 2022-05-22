@@ -1,16 +1,16 @@
-import { Container, Form, InputGroup, Row, Col } from 'react-bootstrap'
-import { useEffect, useReducer, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import jwt_decode from 'jwt-decode'
+import { useState } from 'react'
+import { Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button'
 import TextArea from '../../components/TextArea'
-import Footer from '../Footer/Footer'
-import InnerHeader from '../InnerHeader/InnerHeader'
-import guitarImage from './img/itemThree.png'
-
-import './Checkout.css'
 import { checkout } from '../../redux/order/order.action'
 import { postDeductIntermediaryCommission } from '../../redux/product/product.action'
+import Footer from '../Footer/Footer'
+import InnerHeader from '../InnerHeader/InnerHeader'
+import './Checkout.css'
+import guitarImage from './img/itemThree.png'
+
 
 const Checkout = () => {
   const dispatch = useDispatch()

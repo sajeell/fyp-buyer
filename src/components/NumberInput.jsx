@@ -1,5 +1,4 @@
-import { FormControl, InputGroup, InputGroupText } from 'react-bootstrap'
-
+import { FormControl, InputGroup } from 'react-bootstrap'
 import './Components.css'
 
 const NumberInput = (props) => {

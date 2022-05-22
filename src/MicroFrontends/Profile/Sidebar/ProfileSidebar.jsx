@@ -1,10 +1,9 @@
-import { useNavigate } from 'react-router-dom'
 import { Navigation } from 'react-minimal-side-navigation'
-import { useDispatch, useSelector } from 'react-redux'
-
-import './ProfileSidebar.css'
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
-import { drawerPage, setDrawerPage } from '../../../redux/loader/loader.action'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { drawerPage } from '../../../redux/loader/loader.action'
+import './ProfileSidebar.css'
 
 const ProfileSidebar = () => {
   const dispatch = useDispatch()

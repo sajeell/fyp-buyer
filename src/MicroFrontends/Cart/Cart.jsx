@@ -1,15 +1,8 @@
-import { useEffect } from 'react'
-import { Container, Button, Table } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
+import { useEffect } from 'react'
+import { Button, Container, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
-import { getBiddingCartDetails } from '../../redux/product/product.action'
-import Footer from '../Footer/Footer'
-import InnerHeader from '../InnerHeader/InnerHeader'
-import './Cart.css'
-
-import guitarImage from './img/itemThree.png'
 import {
   setBidding,
   setBiddingID,
@@ -17,8 +10,13 @@ import {
   setPrice,
   setProduct,
   setProductID,
-  setSellerID,
+  setSellerID
 } from '../../redux/order/order.action'
+import { getBiddingCartDetails } from '../../redux/product/product.action'
+import Footer from '../Footer/Footer'
+import InnerHeader from '../InnerHeader/InnerHeader'
+import './Cart.css'
+import guitarImage from './img/itemThree.png'
 
 const Cart = () => {
   const dispatch = useDispatch()

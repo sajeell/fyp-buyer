@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import Modal from 'react-modal'
-import { Container, ToastContainer } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import moment from 'moment'
-import { useParams } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
-
-import Footer from '../Footer/Footer'
-import InnerHeader from '../InnerHeader/InnerHeader'
-import BiddingTab from './Tabs/BiddingTab'
-import ReviewTab from './Tabs/ReviewTab'
-
-import guitarImage from './img/itemThree.png'
-import orangeStar from './img/orangeStar.svg'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { Container, ToastContainer } from 'react-bootstrap'
+import Modal from 'react-modal'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import constants from '../../constants/constants'
 import {
-  getProduct,
   getProductBiddingDetails,
   getProductViaIntermediary,
   participantBid,
-  verifyBid,
+  verifyBid
 } from '../../redux/product/product.action'
-
-import './Product.css'
+import Footer from '../Footer/Footer'
+import InnerHeader from '../InnerHeader/InnerHeader'
+import guitarImage from './img/itemThree.png'
+import orangeStar from './img/orangeStar.svg'
 import BiddingDetailsModal from './Modals/BiddingDetailsModal'
-import constants from '../../constants/constants'
-import { toast } from 'react-toastify'
+import './Product.css'
+import BiddingTab from './Tabs/BiddingTab'
+import ReviewTab from './Tabs/ReviewTab'
 
 const customStyles = {
   content: {
