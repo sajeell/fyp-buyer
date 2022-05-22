@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react'
+import { Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { buyerLogin } from '../../redux/user/user.action'
-
-import './Login.css'
 import 'react-toastify/dist/ReactToastify.css'
-
+import { loading } from '../../redux/loader/loader.action'
+import { buyerLogin } from '../../redux/user/user.action'
 import illustration from './img/car-illustration.png'
 import background from './img/illustration-bg.png'
-
-import { Container } from 'react-bootstrap'
-import { loading } from '../../redux/loader/loader.action'
+import './Login.css'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -56,7 +53,7 @@ const Login = () => {
         <div className='row'>
           <img
             src={illustration}
-            alt='Illustration composed of a car and trees in gray color'
+            alt='Illustration composed of a greek God'
             id='illustration'
           />
           <img
