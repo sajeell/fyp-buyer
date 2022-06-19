@@ -2,6 +2,7 @@ import { ToastContainer } from 'react-bootstrap'
 import './Modals.css'
 
 const BiddingDetailsModal = (props) => {
+  console.log(props.minPrice)
   return (
     <div className='biddingmodal-wrapper'>
       <ToastContainer />

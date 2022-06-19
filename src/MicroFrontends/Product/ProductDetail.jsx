@@ -14,6 +14,7 @@ import ReviewTab from './Tabs/ReviewTab'
 import guitarImage from './img/itemThree.png'
 import orangeStar from './img/orangeStar.svg'
 import {
+  getBiddingParticipants,
   getProduct,
   getProductBiddingDetails,
   participantBid,
@@ -44,9 +45,11 @@ const ProductDetail = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false)
   const [productID, setProductID] = useState('')
   const [maximumPrice, setMaximumPrice] = useState()
+  const [minimumPrice, setMinimumPrice] = useState(0)
   const [email, setEmail] = useState()
   const productDetail = useSelector((state) => state.product.productDetail)
   const verifyBidding = useSelector((state) => state.product.verifyBidding)
+  const participants = useSelector((state) => state.product.participants)
 
   const productBiddingDetails = useSelector(
     (state) => state.product.productBiddingDetails,
@@ -83,7 +86,7 @@ const ProductDetail = () => {
   const bid = () => {
     const id = jwt_decode(token)._id
 
-    if (maximumPrice < productBiddingDetails.minPrice) {
+    if (maximumPrice <= minimumPrice) {
       toast.error(
         'Maximum price should be greater than the bidding minimum price',
       )
@@ -117,6 +120,24 @@ const ProductDetail = () => {
   useEffect(() => {
     getProductDetail()
   }, [id])
+
+  useEffect(() => {
+    if (productBiddingDetails) {
+      dispatch(getBiddingParticipants(token, productBiddingDetails._id))
+    }
+  }, [productBiddingDetails])
+
+  useEffect(() => {
+    if (participants) {
+      let participantsPrices = []
+      participants.map((participant) => {
+        participantsPrices.push(participant.maxPrice)
+      })
+
+
+      setMinimumPrice(Math.max(...participantsPrices))
+    }
+  }, [participants])
 
   return (
     <>
@@ -161,18 +182,6 @@ const ProductDetail = () => {
                         : ''
                       : ''}
                   </h2>
-                  <div className='stars-wrapper'>
-                    <div className='stars'>
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                    </div>
-                    <div className='review-text'>
-                      <span>5.0 - 5 Reviews</span>
-                    </div>
-                  </div>
                   <span>
                     Starts from{' '}
                     <strong>
@@ -192,55 +201,21 @@ const ProductDetail = () => {
                   <span id='warranty-text'>6 months seller warranty</span>
                   <div style={{ marginTop: '3%' }}></div>
                   <p>
-                    Bid starts{' '}
+                    Bid Time:{' '}
                     <strong>
                       {moment(productBiddingDetails.startsOn)
-                        .startOf('hour')
-                        .fromNow()}{' '}
+                        .format('lll')}{' '}
                     </strong>
                   </p>
-                  <div className='productdetail-tabs'>
-                    <div
-                      className={
-                        tabState === 0
-                          ? 'productdetail-tab-active'
-                          : 'productdetail-tab'
-                      }
-                      onClick={() => setTabState(0)}
-                    >
-                      Bidding Information
-                    </div>
-                    <span
-                      className={
-                        tabState === 1
-                          ? 'productdetail-tab-active'
-                          : 'productdetail-tab'
-                      }
-                      onClick={() => setTabState(1)}
-                    >
-                      Reviews (1)
-                    </span>
-                    <span className='productdetail-tab'>
-                      Product Information
-                    </span>
-                  </div>
-                  <div className='tab-content'>
-                    {tabState === 0 ? (
-                      <BiddingTab />
-                    ) : tabState === 1 ? (
-                      <ReviewTab />
-                    ) : (
-                      ''
-                    )}
-                  </div>
                 </div>
                 <div className='productdetail-content-right'>
                   <button
                     className='button'
                     onClick={openModal}
-                    disabled={verifyBidding}
+                    // disabled={verifyBidding}
                     style={{
                       cursor: verifyBidding === true ? 'not-allowed' : 'cursor',
+                      marginLeft: 40
                     }}
                   >
                     Bid
@@ -254,7 +229,7 @@ const ProductDetail = () => {
                   >
                     <BiddingDetailsModal
                       onClose={closeModal}
-                      minPrice={productBiddingDetails.minPrice}
+                      minPrice={minimumPrice}
                       maximumPrice={maximumPrice}
                       incrementPrice={productBiddingDetails.incrementPrice}
                       email={email}

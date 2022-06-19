@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   page: 0,
   error: {},
   response: {},
+  participants: []
 }
 
 const productReducer = (state = INITIAL_STATE, action) => {
@@ -78,6 +79,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         requests: action.payload,
+      }
+    case ActionsType.SET_PARTICIPANTS:
+      return {
+        ...state,
+        participants: action.payload,
       }
     default:
       return state

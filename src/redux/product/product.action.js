@@ -65,6 +65,11 @@ export const setRequests = (data) => ({
   payload: data,
 })
 
+export const setParticipants = (data) => ({
+  type: ActionsType.SET_PARTICIPANTS,
+  payload: data,
+})
+
 export const getFeaturedProducts = (token) => {
   return (dispatch) => {
     if (token == null || token.length < 1) {
@@ -522,6 +527,44 @@ export const postRequest = (token, data) => {
               borderRadius: 5,
             },
           })
+        }
+      })
+      .catch((error) => {
+        const err = error
+        if (err.response) {
+          toast.error(err.response.data.message, {
+            theme: 'colored',
+            style: {
+              borderRadius: 5,
+            },
+          })
+        }
+      })
+  }
+}
+
+export const getBiddingParticipants = (token, biddingId) => {
+  return (dispatch) => {
+    if (token == null || token.length < 1) {
+      return
+    }
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
+
+    axios
+      .get(`${Url}bidding/participant/by/${biddingId}`, {
+        headers: headers,
+      })
+      .then((resp) => {
+        if (resp.status === 404) {
+          dispatch(setParticipants([]))
+          return
+        }
+        if (resp.data) {
+          let response = resp.data
+          dispatch(setParticipants(response))
         }
       })
       .catch((error) => {
