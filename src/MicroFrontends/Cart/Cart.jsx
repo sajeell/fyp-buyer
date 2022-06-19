@@ -92,6 +92,7 @@ const Cart = () => {
     fetchRequestsHelper(token)
   }, [token])
 
+
   return (
     <div className='cart-wrapper'>
       <Container>
@@ -124,7 +125,7 @@ const Cart = () => {
               {biddingCartData && biddingCartData.length > 0 ? (
                 biddingCartData.map((item, index) => (
                   <tr key={index}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td className='table-img-container'>
                       <img
                         src={
@@ -179,7 +180,7 @@ const Cart = () => {
               {bargainingCartData && bargainingCartData.length > 0 ? (
                 bargainingCartData.map((item, index) => (
                   <tr key={index}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td className='table-img-container'>
                       <img
                         src={

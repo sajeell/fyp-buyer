@@ -34,21 +34,9 @@ const InnerHeader = () => {
           className='justify-content-end'
         >
           <Nav style={{ alignItems: 'center' }}>
-            <Nav.Link href=''>Featured</Nav.Link>
             <Nav.Link href='/antiques'>Antiques</Nav.Link>
             <Nav.Link href='/handmade'>Handmade</Nav.Link>
             <Nav.Link href='/post-request'>Post Request</Nav.Link>
-            <Nav.Link className='header-icon'>
-              <Form className='d-flex'>
-                <FormControl
-                  type='search'
-                  placeholder='Search'
-                  className='me-2'
-                  aria-label='Search'
-                />
-                <Button variant='outline-success'>Search</Button>
-              </Form>
-            </Nav.Link>
             <Nav.Link className='heade-cart-icon' href='/cart'>
               <img src={cartIcon} alt='Cart Icon In Gray Color' />
             </Nav.Link>

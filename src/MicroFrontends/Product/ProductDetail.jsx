@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import Modal from 'react-modal'
-import { Container, ToastContainer } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import moment from 'moment'
-import { useParams } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { Container, ToastContainer } from 'react-bootstrap'
+import Modal from 'react-modal'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import Footer from '../Footer/Footer'
 import InnerHeader from '../InnerHeader/InnerHeader'
-import BiddingTab from './Tabs/BiddingTab'
-import ReviewTab from './Tabs/ReviewTab'
 
-import guitarImage from './img/itemThree.png'
-import orangeStar from './img/orangeStar.svg'
 import {
   getBiddingParticipants,
   getProduct,
   getProductBiddingDetails,
   participantBid,
-  verifyBid,
+  verifyBid
 } from '../../redux/product/product.action'
+import guitarImage from './img/itemThree.png'
 
-import './Product.css'
-import BiddingDetailsModal from './Modals/BiddingDetailsModal'
-import constants from '../../constants/constants'
 import { toast } from 'react-toastify'
+import constants from '../../constants/constants'
+import BiddingDetailsModal from './Modals/BiddingDetailsModal'
+import './Product.css'
 
 const customStyles = {
   content: {
@@ -135,7 +132,11 @@ const ProductDetail = () => {
       })
 
 
-      setMinimumPrice(Math.max(...participantsPrices))
+      if (participants.length > 0) {
+        setMinimumPrice(Math.max(...participantsPrices))
+      } else {
+        setMinimumPrice(productBiddingDetails.minPrice)
+      }
     }
   }, [participants])
 
@@ -204,7 +205,7 @@ const ProductDetail = () => {
                     Bid Time:{' '}
                     <strong>
                       {moment(productBiddingDetails.startsOn)
-                        .format('lll')}{' '}
+                        .format('ll')}{' '}
                     </strong>
                   </p>
                 </div>
