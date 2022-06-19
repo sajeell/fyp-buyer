@@ -212,7 +212,7 @@ const ProductDetail = () => {
                   <button
                     className='button'
                     onClick={openModal}
-                    // disabled={verifyBidding}
+                    disabled={verifyBidding}
                     style={{
                       cursor: verifyBidding === true ? 'not-allowed' : 'cursor',
                       marginLeft: 40
