@@ -149,18 +149,6 @@ const IntermediaryProductDetail = () => {
                         : ''
                       : ''}
                   </h2>
-                  <div className='stars-wrapper'>
-                    <div className='stars'>
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                      <img src={orangeStar} alt='Review Orange Star' />
-                    </div>
-                    <div className='review-text'>
-                      <span>5.0 - 5 Reviews</span>
-                    </div>
-                  </div>
                   <span>
                     Starts from{' '}
                     <strong>
@@ -180,47 +168,12 @@ const IntermediaryProductDetail = () => {
                   <span id='warranty-text'>6 months seller warranty</span>
                   <div style={{ marginTop: '3%' }}></div>
                   <p>
-                    Bid starts{' '}
+                    Bid time{' '}
                     <strong>
                       {moment(productBiddingDetails.startsOn)
-                        .startOf('hour')
-                        .fromNow()}{' '}
+                        .format('ll')}{' '}
                     </strong>
                   </p>
-                  <div className='productdetail-tabs'>
-                    <div
-                      className={
-                        tabState === 0
-                          ? 'productdetail-tab-active'
-                          : 'productdetail-tab'
-                      }
-                      onClick={() => setTabState(0)}
-                    >
-                      Bidding Information
-                    </div>
-                    <span
-                      className={
-                        tabState === 1
-                          ? 'productdetail-tab-active'
-                          : 'productdetail-tab'
-                      }
-                      onClick={() => setTabState(1)}
-                    >
-                      Reviews (1)
-                    </span>
-                    <span className='productdetail-tab'>
-                      Product Information
-                    </span>
-                  </div>
-                  <div className='tab-content'>
-                    {tabState === 0 ? (
-                      <BiddingTab />
-                    ) : tabState === 1 ? (
-                      <ReviewTab />
-                    ) : (
-                      ''
-                    )}
-                  </div>
                 </div>
                 <div className='productdetail-content-right'>
                   <button
